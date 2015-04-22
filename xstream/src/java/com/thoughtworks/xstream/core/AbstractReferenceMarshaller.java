@@ -33,7 +33,7 @@ import java.util.Iterator;
  */
 public abstract class AbstractReferenceMarshaller extends TreeMarshaller implements MarshallingContext {
 
-    private ObjectIdDictionary references = new ObjectIdDictionary();
+    /*Visible for Testing*/ ObjectIdDictionary references = new ObjectIdDictionary();
     private ObjectIdDictionary implicitElements = new ObjectIdDictionary();
     private PathTracker pathTracker = new PathTracker();
     private Path lastPath;

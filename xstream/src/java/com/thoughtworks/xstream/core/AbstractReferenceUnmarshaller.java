@@ -10,15 +10,15 @@
  */
 package com.thoughtworks.xstream.core;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.thoughtworks.xstream.converters.ConversionException;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.ConverterLookup;
 import com.thoughtworks.xstream.core.util.FastStack;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.mapper.Mapper;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Abstract base class for a TreeUnmarshaller, that resolves references.
@@ -31,7 +31,7 @@ import com.thoughtworks.xstream.mapper.Mapper;
 public abstract class AbstractReferenceUnmarshaller extends TreeUnmarshaller {
 
     private static final Object NULL = new Object();
-    private Map values = new HashMap();
+    /*Visible For Testing*/ Map values = new HashMap();
     private FastStack parentStack = new FastStack(16);
 
     public AbstractReferenceUnmarshaller(Object root, HierarchicalStreamReader reader,
