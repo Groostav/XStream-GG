@@ -66,17 +66,115 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="XStream.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="XStream.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/java/com/thoughtworks/xstream/XStream.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="22874" max-vertical-offset="34034">
-              <caret line="1439" column="61" selection-start-line="1439" selection-start-column="18" selection-end-line="1439" selection-end-column="18" />
+            <state vertical-scroll-proportion="0.58690476" vertical-offset="13889" max-vertical-offset="36159">
+              <caret line="846" column="86" selection-start-line="846" selection-start-column="80" selection-end-line="846" selection-end-column="80" />
               <folding>
-                <element signature="e#41223#41224#0" expanded="true" />
-                <element signature="e#41276#41277#0" expanded="true" />
-                <element signature="e#83196#83197#0" expanded="true" />
-                <element signature="e#83255#83256#0" expanded="true" />
+                <element signature="e#0#87407#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#9445#9446#0" expanded="true" />
+                <element signature="e#9502#9503#0" expanded="true" />
+                <element signature="e#9958#9959#0" expanded="true" />
+                <element signature="e#10029#10030#0" expanded="true" />
+                <element signature="e#22589#22590#0" expanded="true" />
+                <element signature="e#22616#22617#0" expanded="true" />
+                <element signature="e#22720#22721#0" expanded="true" />
+                <element signature="e#22748#22749#0" expanded="true" />
+                <element signature="e#41488#41489#0" expanded="true" />
+                <element signature="e#41530#41531#0" expanded="true" />
+                <element signature="e#42243#42244#0" expanded="true" />
+                <element signature="e#42296#42297#0" expanded="true" />
+                <element signature="e#42482#42483#0" expanded="true" />
+                <element signature="e#42567#42568#0" expanded="true" />
+                <element signature="e#42762#42763#0" expanded="true" />
+                <element signature="e#42846#42847#0" expanded="true" />
+                <element signature="e#43174#43175#0" expanded="true" />
+                <element signature="e#43215#43216#0" expanded="true" />
+                <element signature="e#43546#43547#0" expanded="true" />
+                <element signature="e#43588#43589#0" expanded="true" />
+                <element signature="e#44048#44049#0" expanded="true" />
+                <element signature="e#44107#44108#0" expanded="true" />
+                <element signature="e#45254#45255#0" expanded="true" />
+                <element signature="e#45336#45337#0" expanded="true" />
+                <element signature="e#46945#46946#0" expanded="true" />
+                <element signature="e#46997#46998#0" expanded="true" />
+                <element signature="e#47510#47511#0" expanded="true" />
+                <element signature="e#47562#47563#0" expanded="true" />
+                <element signature="e#58703#58704#0" expanded="true" />
+                <element signature="e#58764#58765#0" expanded="true" />
+                <element signature="e#59032#59033#0" expanded="true" />
+                <element signature="e#59093#59094#0" expanded="true" />
+                <element signature="e#60721#60722#0" expanded="true" />
+                <element signature="e#60750#60751#0" expanded="true" />
+                <element signature="e#60932#60933#0" expanded="true" />
+                <element signature="e#60973#60974#0" expanded="true" />
+                <element signature="e#61024#61025#0" expanded="true" />
+                <element signature="e#61062#61063#0" expanded="true" />
+                <element signature="e#65236#65237#0" expanded="true" />
+                <element signature="e#65295#65296#0" expanded="true" />
+                <element signature="e#68573#68574#0" expanded="true" />
+                <element signature="e#68621#68622#0" expanded="true" />
+                <element signature="e#73447#73448#0" expanded="true" />
+                <element signature="e#73510#73511#0" expanded="true" />
+                <element signature="e#73884#73885#0" expanded="true" />
+                <element signature="e#73938#73939#0" expanded="true" />
+                <element signature="e#76893#76894#0" expanded="true" />
+                <element signature="e#76939#76940#0" expanded="true" />
+                <element signature="e#77488#77489#0" expanded="true" />
+                <element signature="e#77550#77551#0" expanded="true" />
+                <element signature="e#77699#77700#0" expanded="true" />
+                <element signature="e#77757#77758#0" expanded="true" />
+                <element signature="e#78111#78112#0" expanded="true" />
+                <element signature="e#78154#78155#0" expanded="true" />
+                <element signature="e#78920#78921#0" expanded="true" />
+                <element signature="e#78969#78970#0" expanded="true" />
+                <element signature="e#79187#79188#0" expanded="true" />
+                <element signature="e#79250#79251#0" expanded="true" />
+                <element signature="e#80585#80586#0" expanded="true" />
+                <element signature="e#80638#80639#0" expanded="true" />
+                <element signature="e#81971#81972#0" expanded="true" />
+                <element signature="e#82035#82036#0" expanded="true" />
+                <element signature="e#82218#82219#0" expanded="true" />
+                <element signature="e#82282#82283#0" expanded="true" />
+                <element signature="e#82475#82476#0" expanded="true" />
+                <element signature="e#82539#82540#0" expanded="true" />
+                <element signature="e#82801#82802#0" expanded="true" />
+                <element signature="e#82865#82866#0" expanded="true" />
+                <element signature="e#83128#83129#0" expanded="true" />
+                <element signature="e#83192#83193#0" expanded="true" />
+                <element signature="e#83940#83941#0" expanded="true" />
+                <element signature="e#84007#84008#0" expanded="true" />
+                <element signature="e#84216#84217#0" expanded="true" />
+                <element signature="e#84275#84276#0" expanded="true" />
+                <element signature="e#84479#84480#0" expanded="true" />
+                <element signature="e#84544#84545#0" expanded="true" />
+                <element signature="e#84734#84735#0" expanded="true" />
+                <element signature="e#84799#84800#0" expanded="true" />
+                <element signature="e#84999#85000#0" expanded="true" />
+                <element signature="e#85064#85065#0" expanded="true" />
+                <element signature="e#85333#85334#0" expanded="true" />
+                <element signature="e#85398#85399#0" expanded="true" />
+                <element signature="e#85668#85669#0" expanded="true" />
+                <element signature="e#85733#85734#0" expanded="true" />
+                <element signature="e#86483#86484#0" expanded="true" />
+                <element signature="e#86551#86552#0" expanded="true" />
+                <element signature="e#87051#87052#0" expanded="true" />
+                <element signature="e#87096#87097#0" expanded="true" />
+                <element signature="e#87359#87360#0" expanded="true" />
+                <element signature="e#87397#87398#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BufferedImagesTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/com/thoughtworks/acceptance/BufferedImagesTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="95" max-vertical-offset="1275">
+              <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -117,34 +215,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Mapper.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/java/com/thoughtworks/xstream/mapper/Mapper.java">
+      <file leaf-file-name="ImmutableRegistryTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/com/thoughtworks/acceptance/ImmutableRegistryTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="366" max-vertical-offset="2958">
-              <caret line="49" column="12" selection-start-line="49" selection-start-column="12" selection-end-line="49" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ConversionException.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/java/com/thoughtworks/xstream/converters/ConversionException.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="584" max-vertical-offset="1598">
-              <caret line="70" column="45" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="482" max-vertical-offset="1309">
+              <caret line="49" column="45" selection-start-line="49" selection-start-column="45" selection-end-line="49" selection-end-column="45" />
               <folding>
-                <element signature="e#1604#1605#0" expanded="true" />
-                <element signature="e#1630#1631#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ImmutableRegistryTest.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/com/thoughtworks/acceptance/ImmutableRegistryTest.java">
+      <file leaf-file-name="ReferenceByXPathMarshallingStrategyTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/com/thoughtworks/xstream/core/ReferenceByXPathMarshallingStrategyTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.007255139" vertical-offset="482" max-vertical-offset="1309">
-              <caret line="28" column="66" selection-start-line="28" selection-start-column="66" selection-end-line="28" selection-end-column="66" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2167" max-vertical-offset="2839">
+              <caret line="167" column="74" selection-start-line="167" selection-start-column="16" selection-end-line="167" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -181,10 +268,10 @@
         <option value="$PROJECT_DIR$/src/java/com/thoughtworks/xstream/mapper/MapperWrapper.java" />
         <option value="$PROJECT_DIR$/src/java/com/thoughtworks/xstream/mapper/ImmutableTypesMapper.java" />
         <option value="$PROJECT_DIR$/src/java/com/thoughtworks/xstream/mapper/DefaultMapper.java" />
-        <option value="$PROJECT_DIR$/src/java/com/thoughtworks/xstream/XStream.java" />
         <option value="$PROJECT_DIR$/src/java/com/thoughtworks/xstream/core/AbstractReferenceUnmarshaller.java" />
         <option value="$PROJECT_DIR$/src/java/com/thoughtworks/xstream/core/AbstractReferenceMarshaller.java" />
         <option value="$PROJECT_DIR$/src/java/com/thoughtworks/xstream/mapper/EnumMapper.java" />
+        <option value="$PROJECT_DIR$/src/java/com/thoughtworks/xstream/XStream.java" />
       </list>
     </option>
   </component>
@@ -339,88 +426,6 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thoughtworks" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xstream" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xstream" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xstream" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thoughtworks" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="acceptance" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xstream" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xstream" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thoughtworks" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="acceptance" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="someobjects" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xstream" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xstream" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -470,41 +475,7 @@
       <recent name="com.thoughtworks.xstream.converters.basic" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ImmutableRegistryTest">
-    <configuration default="false" name="ReferenceByXPathMarshallingStrategyTest.testDoNotKeepXPathMapForImmutablesOnUnmarshall" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.thoughtworks.xstream.core.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="xstream" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.thoughtworks.xstream.core" />
-      <option name="MAIN_CLASS_NAME" value="com.thoughtworks.xstream.core.ReferenceByXPathMarshallingStrategyTest" />
-      <option name="METHOD_NAME" value="testDoNotKeepXPathMapForImmutablesOnUnmarshall" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="JUnit.com.thoughtworks in xstream">
     <configuration default="false" name="All in xstream" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="xstream" />
@@ -625,6 +596,34 @@
       </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="com.thoughtworks in xstream" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.thoughtworks.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="xstream" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.thoughtworks" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -773,19 +772,19 @@
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="JUnit.ReferenceByXPathMarshallingStrategyTest.testDoNotKeepXPathMapForImmutablesOnMarshall" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.ReferenceByXPathMarshallingStrategyTest.testDoNotKeepXPathMapForImmutablesOnUnmarshall" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.All in xstream" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.BasicTypesTest.testNull" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.ImmutableRegistryTest.testDocumentWithPreviouslyMutableNowImmutableMembersDeserializeOK" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.ImmutableRegistryTest" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.All in xstream" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.BasicTypesTest.testNull" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.ImmutableRegistryTest.testDocumentWithPreviouslyMutableNowImmutableMembersDeserializeOK" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.ImmutableRegistryTest" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.com.thoughtworks in xstream" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.ImmutableRegistryTest" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.ImmutableRegistryTest.testDocumentWithPreviouslyMutableNowImmutableMembersDeserializeOK" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.All in xstream" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.BasicTypesTest.testNull" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.ReferenceByXPathMarshallingStrategyTest.testDoNotKeepXPathMapForImmutablesOnUnmarshall" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.com.thoughtworks in xstream" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.ImmutableRegistryTest" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.ImmutableRegistryTest.testDocumentWithPreviouslyMutableNowImmutableMembersDeserializeOK" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.All in xstream" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.BasicTypesTest.testNull" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
@@ -801,12 +800,12 @@
       <updated>1429676008035</updated>
       <workItem from="1429676010622" duration="548000" />
       <workItem from="1429676583011" duration="4592000" />
-      <workItem from="1429730494932" duration="7390000" />
+      <workItem from="1429730494932" duration="7758000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12530000" />
+    <option name="totallyTimeSpent" value="12898000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
@@ -896,14 +895,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/com/thoughtworks/xstream/converters/basic/URIConverterTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="369" max-vertical-offset="850">
-          <caret line="54" column="67" selection-start-line="54" selection-start-column="67" selection-end-line="54" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/com/thoughtworks/xstream/io/json/JsonHierarchicalStreamDriverTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="12121">
@@ -1212,20 +1203,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/com/thoughtworks/xstream/core/ReferenceByXPathMarshallingStrategyTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1485" max-vertical-offset="2873">
-          <caret line="155" column="69" selection-start-line="155" selection-start-column="30" selection-end-line="155" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3062#3063#0" expanded="true" />
-            <element signature="e#3137#3138#0" expanded="true" />
-            <element signature="e#4060#4090#0" expanded="true" />
-            <element signature="e#5108#5138#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/com/thoughtworks/xstream/converters/ErrorWriter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="244" max-vertical-offset="969">
@@ -1288,19 +1265,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/com/thoughtworks/xstream/XStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="22874" max-vertical-offset="34034">
-          <caret line="1439" column="61" selection-start-line="1439" selection-start-column="18" selection-end-line="1439" selection-end-column="18" />
-          <folding>
-            <element signature="e#41223#41224#0" expanded="true" />
-            <element signature="e#41276#41277#0" expanded="true" />
-            <element signature="e#83196#83197#0" expanded="true" />
-            <element signature="e#83255#83256#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/com/thoughtworks/xstream/core/AbstractReferenceUnmarshaller.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="417" max-vertical-offset="1445">
@@ -1330,10 +1294,129 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/com/thoughtworks/acceptance/ImmutableRegistryTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.007255139" vertical-offset="482" max-vertical-offset="1309">
-          <caret line="28" column="66" selection-start-line="28" selection-start-column="66" selection-end-line="28" selection-end-column="66" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="482" max-vertical-offset="1309">
+          <caret line="49" column="45" selection-start-line="49" selection-start-column="45" selection-end-line="49" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/com/thoughtworks/xstream/core/ReferenceByXPathMarshallingStrategyTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2167" max-vertical-offset="2839">
+          <caret line="167" column="74" selection-start-line="167" selection-start-column="16" selection-end-line="167" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/com/thoughtworks/acceptance/BufferedImagesTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="95" max-vertical-offset="1275">
+          <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/com/thoughtworks/xstream/XStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.58690476" vertical-offset="13889" max-vertical-offset="36159">
+          <caret line="846" column="86" selection-start-line="846" selection-start-column="80" selection-end-line="846" selection-end-column="80" />
+          <folding>
+            <element signature="e#0#87407#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#9445#9446#0" expanded="true" />
+            <element signature="e#9502#9503#0" expanded="true" />
+            <element signature="e#9958#9959#0" expanded="true" />
+            <element signature="e#10029#10030#0" expanded="true" />
+            <element signature="e#22589#22590#0" expanded="true" />
+            <element signature="e#22616#22617#0" expanded="true" />
+            <element signature="e#22720#22721#0" expanded="true" />
+            <element signature="e#22748#22749#0" expanded="true" />
+            <element signature="e#41488#41489#0" expanded="true" />
+            <element signature="e#41530#41531#0" expanded="true" />
+            <element signature="e#42243#42244#0" expanded="true" />
+            <element signature="e#42296#42297#0" expanded="true" />
+            <element signature="e#42482#42483#0" expanded="true" />
+            <element signature="e#42567#42568#0" expanded="true" />
+            <element signature="e#42762#42763#0" expanded="true" />
+            <element signature="e#42846#42847#0" expanded="true" />
+            <element signature="e#43174#43175#0" expanded="true" />
+            <element signature="e#43215#43216#0" expanded="true" />
+            <element signature="e#43546#43547#0" expanded="true" />
+            <element signature="e#43588#43589#0" expanded="true" />
+            <element signature="e#44048#44049#0" expanded="true" />
+            <element signature="e#44107#44108#0" expanded="true" />
+            <element signature="e#45254#45255#0" expanded="true" />
+            <element signature="e#45336#45337#0" expanded="true" />
+            <element signature="e#46945#46946#0" expanded="true" />
+            <element signature="e#46997#46998#0" expanded="true" />
+            <element signature="e#47510#47511#0" expanded="true" />
+            <element signature="e#47562#47563#0" expanded="true" />
+            <element signature="e#58703#58704#0" expanded="true" />
+            <element signature="e#58764#58765#0" expanded="true" />
+            <element signature="e#59032#59033#0" expanded="true" />
+            <element signature="e#59093#59094#0" expanded="true" />
+            <element signature="e#60721#60722#0" expanded="true" />
+            <element signature="e#60750#60751#0" expanded="true" />
+            <element signature="e#60932#60933#0" expanded="true" />
+            <element signature="e#60973#60974#0" expanded="true" />
+            <element signature="e#61024#61025#0" expanded="true" />
+            <element signature="e#61062#61063#0" expanded="true" />
+            <element signature="e#65236#65237#0" expanded="true" />
+            <element signature="e#65295#65296#0" expanded="true" />
+            <element signature="e#68573#68574#0" expanded="true" />
+            <element signature="e#68621#68622#0" expanded="true" />
+            <element signature="e#73447#73448#0" expanded="true" />
+            <element signature="e#73510#73511#0" expanded="true" />
+            <element signature="e#73884#73885#0" expanded="true" />
+            <element signature="e#73938#73939#0" expanded="true" />
+            <element signature="e#76893#76894#0" expanded="true" />
+            <element signature="e#76939#76940#0" expanded="true" />
+            <element signature="e#77488#77489#0" expanded="true" />
+            <element signature="e#77550#77551#0" expanded="true" />
+            <element signature="e#77699#77700#0" expanded="true" />
+            <element signature="e#77757#77758#0" expanded="true" />
+            <element signature="e#78111#78112#0" expanded="true" />
+            <element signature="e#78154#78155#0" expanded="true" />
+            <element signature="e#78920#78921#0" expanded="true" />
+            <element signature="e#78969#78970#0" expanded="true" />
+            <element signature="e#79187#79188#0" expanded="true" />
+            <element signature="e#79250#79251#0" expanded="true" />
+            <element signature="e#80585#80586#0" expanded="true" />
+            <element signature="e#80638#80639#0" expanded="true" />
+            <element signature="e#81971#81972#0" expanded="true" />
+            <element signature="e#82035#82036#0" expanded="true" />
+            <element signature="e#82218#82219#0" expanded="true" />
+            <element signature="e#82282#82283#0" expanded="true" />
+            <element signature="e#82475#82476#0" expanded="true" />
+            <element signature="e#82539#82540#0" expanded="true" />
+            <element signature="e#82801#82802#0" expanded="true" />
+            <element signature="e#82865#82866#0" expanded="true" />
+            <element signature="e#83128#83129#0" expanded="true" />
+            <element signature="e#83192#83193#0" expanded="true" />
+            <element signature="e#83940#83941#0" expanded="true" />
+            <element signature="e#84007#84008#0" expanded="true" />
+            <element signature="e#84216#84217#0" expanded="true" />
+            <element signature="e#84275#84276#0" expanded="true" />
+            <element signature="e#84479#84480#0" expanded="true" />
+            <element signature="e#84544#84545#0" expanded="true" />
+            <element signature="e#84734#84735#0" expanded="true" />
+            <element signature="e#84799#84800#0" expanded="true" />
+            <element signature="e#84999#85000#0" expanded="true" />
+            <element signature="e#85064#85065#0" expanded="true" />
+            <element signature="e#85333#85334#0" expanded="true" />
+            <element signature="e#85398#85399#0" expanded="true" />
+            <element signature="e#85668#85669#0" expanded="true" />
+            <element signature="e#85733#85734#0" expanded="true" />
+            <element signature="e#86483#86484#0" expanded="true" />
+            <element signature="e#86551#86552#0" expanded="true" />
+            <element signature="e#87051#87052#0" expanded="true" />
+            <element signature="e#87096#87097#0" expanded="true" />
+            <element signature="e#87359#87360#0" expanded="true" />
+            <element signature="e#87397#87398#0" expanded="true" />
           </folding>
         </state>
       </provider>

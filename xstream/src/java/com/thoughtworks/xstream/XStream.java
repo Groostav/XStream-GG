@@ -825,36 +825,35 @@ public class XStream {
         }
 
         // primitives are always immutable
-        addImmutableType(boolean.class);
-        addImmutableType(Boolean.class);
-        addImmutableType(byte.class);
-        addImmutableType(Byte.class);
-        addImmutableType(char.class);
-        addImmutableType(Character.class);
-        addImmutableType(double.class);
-        addImmutableType(Double.class);
-        addImmutableType(float.class);
-        addImmutableType(Float.class);
-        addImmutableType(int.class);
-        addImmutableType(Integer.class);
-        addImmutableType(long.class);
-        addImmutableType(Long.class);
-        addImmutableType(short.class);
-        addImmutableType(Short.class);
+        addImmutableType(boolean.class,     ReferencePathRetentionPolicy.NEVER);
+        addImmutableType(Boolean.class,     ReferencePathRetentionPolicy.NEVER);
+        addImmutableType(byte.class,        ReferencePathRetentionPolicy.NEVER);
+        addImmutableType(Byte.class,        ReferencePathRetentionPolicy.NEVER);
+        addImmutableType(char.class,        ReferencePathRetentionPolicy.NEVER);
+        addImmutableType(double.class,      ReferencePathRetentionPolicy.NEVER);
+        addImmutableType(Double.class,      ReferencePathRetentionPolicy.NEVER);
+        addImmutableType(float.class,       ReferencePathRetentionPolicy.NEVER);
+        addImmutableType(Float.class,       ReferencePathRetentionPolicy.NEVER);
+        addImmutableType(int.class,         ReferencePathRetentionPolicy.NEVER);
+        addImmutableType(Integer.class,     ReferencePathRetentionPolicy.NEVER);
+        addImmutableType(long.class,        ReferencePathRetentionPolicy.NEVER);
+        addImmutableType(Long.class,        ReferencePathRetentionPolicy.NEVER);
+        addImmutableType(short.class,       ReferencePathRetentionPolicy.NEVER);
+        addImmutableType(Short.class,       ReferencePathRetentionPolicy.NEVER);
 
         // additional types
-        addImmutableType(Mapper.Null.class);
-        addImmutableType(BigDecimal.class);
-        addImmutableType(BigInteger.class);
-        addImmutableType(String.class);
-        addImmutableType(URI.class);
-        addImmutableType(URL.class);
-        addImmutableType(File.class);
-        addImmutableType(Class.class);
+        addImmutableType(Mapper.Null.class, ReferencePathRetentionPolicy.NEVER);
+        addImmutableType(BigDecimal.class,  ReferencePathRetentionPolicy.NEVER);
+        addImmutableType(BigInteger.class,  ReferencePathRetentionPolicy.NEVER);
+        addImmutableType(String.class,      ReferencePathRetentionPolicy.NEVER);
+        addImmutableType(URI.class,         ReferencePathRetentionPolicy.NEVER);
+        addImmutableType(URL.class,         ReferencePathRetentionPolicy.NEVER);
+        addImmutableType(File.class,        ReferencePathRetentionPolicy.NEVER);
+        addImmutableType(Class.class,       ReferencePathRetentionPolicy.NEVER);
 
-        addImmutableType(Collections.EMPTY_LIST.getClass());
-        addImmutableType(Collections.EMPTY_SET.getClass());
-        addImmutableType(Collections.EMPTY_MAP.getClass());
+        addImmutableType(Collections.EMPTY_LIST.getClass(), ReferencePathRetentionPolicy.NEVER);
+        addImmutableType(Collections.EMPTY_SET.getClass(),  ReferencePathRetentionPolicy.NEVER);
+        addImmutableType(Collections.EMPTY_MAP.getClass(),  ReferencePathRetentionPolicy.NEVER);
 
         if (JVM.isAWTAvailable()) {
             addImmutableTypeDynamically("java.awt.font.TextAttribute");
