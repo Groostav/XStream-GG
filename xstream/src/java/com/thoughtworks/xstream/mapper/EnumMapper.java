@@ -11,6 +11,7 @@
  */
 package com.thoughtworks.xstream.mapper;
 
+import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.ConverterLookup;
 import com.thoughtworks.xstream.converters.SingleValueConverter;
 import com.thoughtworks.xstream.converters.enums.EnumSingleValueConverter;
@@ -64,8 +65,10 @@ public class EnumMapper extends MapperWrapper implements Caching {
     }
 
     @Override
-    public boolean isImmutableValueType(Class type, Context context) {
-        return Enum.class.isAssignableFrom(type) || super.isImmutableValueType(type, context);
+    public XStream.ReferencePathRetentionPolicy getPathRetentionPolicy(Class type) {
+        return Enum.class.isAssignableFrom(type)
+                ? XStream.ReferencePathRetentionPolicy.NEVER
+                : super.getPathRetentionPolicy(type);
     }
 
     @Override

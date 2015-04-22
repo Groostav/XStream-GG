@@ -11,6 +11,7 @@
  */
 package com.thoughtworks.xstream.mapper;
 
+import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.SingleValueConverter;
 import com.thoughtworks.xstream.core.ClassLoaderReference;
@@ -96,8 +97,8 @@ public class DefaultMapper implements Mapper {
         return attribute;
     }
 
-    public boolean isImmutableValueType(Class type, Context context) {
-        return false;
+    public XStream.ReferencePathRetentionPolicy getPathRetentionPolicy(Class type) {
+        return XStream.ReferencePathRetentionPolicy.ALWAYS;
     }
 
     public String getFieldNameForItemTypeAndName(Class definedIn, Class itemType, String itemFieldName) {

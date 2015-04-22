@@ -10,6 +10,7 @@
  */
 package com.thoughtworks.xstream.core;
 
+import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.ConversionException;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.ConverterLookup;
@@ -18,7 +19,9 @@ import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.mapper.Mapper;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Abstract base class for a TreeUnmarshaller, that resolves references.
@@ -30,9 +33,16 @@ import java.util.Map;
  */
 public abstract class AbstractReferenceUnmarshaller extends TreeUnmarshaller {
 
+    private static final Set policiesRetainingPathsForUnmarshalling;
     private static final Object NULL = new Object();
     /*Visible For Testing*/ Map values = new HashMap();
     private FastStack parentStack = new FastStack(16);
+
+    static{
+        policiesRetainingPathsForUnmarshalling = new HashSet();
+        policiesRetainingPathsForUnmarshalling.add(XStream.ReferencePathRetentionPolicy.ALWAYS);
+        policiesRetainingPathsForUnmarshalling.add(XStream.ReferencePathRetentionPolicy.BACKWARDS_COMPATIBLE);
+    }
 
     public AbstractReferenceUnmarshaller(Object root, HierarchicalStreamReader reader,
                                      ConverterLookup converterLookup, Mapper mapper) {
@@ -52,15 +62,15 @@ public abstract class AbstractReferenceUnmarshaller extends TreeUnmarshaller {
 
         String referenceAttrName = getMapper().aliasForSystemAttribute("reference");
         String reference = referenceAttrName == null ? null : reader.getAttribute(referenceAttrName);
-        boolean isImmutable = type != null && getMapper().isImmutableValueType(type, Mapper.Context.UNMARSHALLING);
+        boolean doesntUseReference = type != null && ! policiesRetainingPathsForUnmarshalling.contains(getMapper().getPathRetentionPolicy(type));
 
-        if (reference == null && isImmutable){
-            //if reference is not null but the type is immutable, its possible the ref is to
+        if (reference == null && doesntUseReference){
+            //if reference is not null but type is declared as not using refs, its possible the ref is to
             //a subclass instance somewhere else on the document, so treat it normally.
             result = super.convert(parent, type, converter);
         } else if (reference != null) {
             Object cache = values.get(getReferenceKey(reference));
-            throwIfReferenceIsBad(type, reference, isImmutable, cache);
+            throwIfReferenceIsBad(type, reference, doesntUseReference, cache);
             result = cache == NULL ? null : cache;
         } else {
             Object currentReferenceKey = getCurrentReferenceKey();

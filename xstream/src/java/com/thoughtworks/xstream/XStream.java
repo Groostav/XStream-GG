@@ -223,7 +223,7 @@ public class XStream {
     public static final int SINGLE_NODE_XPATH_RELATIVE_REFERENCES = 1005;
     public static final int SINGLE_NODE_XPATH_ABSOLUTE_REFERENCES = 1006;
 
-    public static enum ReferencePathRetentionPolicy { BACKWARDS_COMPATIBLE, NEVER }
+    public static enum ReferencePathRetentionPolicy { ALWAYS, BACKWARDS_COMPATIBLE, NEVER }
 
     public static final int PRIORITY_VERY_HIGH = 10000;
     public static final int PRIORITY_NORMAL = 0;
