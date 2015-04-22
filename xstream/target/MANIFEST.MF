@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Implementation-Title: XStream Core
+X-Compile-Target: 1.5
+Implementation-Version: 0.0.0
+Built-By: Geoff
+Specification-Title: XStream Core
+Implementation-Vendor-Id: com.thoughtworks.xstream
+X-Builder: Maven 3.0.5
+X-Build-Time: 20150421-2113
+X-Build-Os: Windows 8.1
+Created-By: IntelliJ IDEA
+Build-Jdk: 1.8.0_31
+Specification-Version: ${project.info.majorVersion}.${project.info.min
+ orVersion}
+X-Compile-Source: 1.5
+
