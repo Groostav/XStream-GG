@@ -52,18 +52,15 @@ public abstract class AbstractReferenceUnmarshaller extends TreeUnmarshaller {
 
         String referenceAttrName = getMapper().aliasForSystemAttribute("reference");
         String reference = referenceAttrName == null ? null : reader.getAttribute(referenceAttrName);
+        boolean isImmutable = type != null && getMapper().isImmutableValueType(type, Mapper.Context.UNMARSHALLING);
 
-        if (type != null && getMapper().isImmutableValueType(type)){
+        if (reference == null && isImmutable){
+            //if reference is not null but the type is immutable, its possible the ref is to
+            //a subclass instance somewhere else on the document, so treat it normally.
             result = super.convert(parent, type, converter);
-        }
-        else
-        if (reference != null) {
+        } else if (reference != null) {
             Object cache = values.get(getReferenceKey(reference));
-            if (cache == null) {
-                final ConversionException ex = new ConversionException("Invalid reference");
-                ex.add("reference", reference);
-                throw ex;
-            } 
+            throwIfReferenceIsBad(type, reference, isImmutable, cache);
             result = cache == NULL ? null : cache;
         } else {
             Object currentReferenceKey = getCurrentReferenceKey();
@@ -76,7 +73,24 @@ public abstract class AbstractReferenceUnmarshaller extends TreeUnmarshaller {
         }
         return result;
     }
-    
+
+    private void throwIfReferenceIsBad(Class type, String reference, boolean isImmutable, Object referant) {
+        if (referant != null) {
+            return;
+        }
+
+        String msg = "Invalid reference";
+        msg = isImmutable
+                ? msg + ", no references to any instances of that class are kept because it is immutable"
+                : msg;
+
+        final ConversionException ex = new ConversionException(msg);
+        ex.add("class", type == null ? "not available" : type.getCanonicalName());
+        ex.add("reference", reference);
+
+        throw ex;
+    }
+
     protected abstract Object getReferenceKey(String reference);
     protected abstract Object getCurrentReferenceKey();
 }

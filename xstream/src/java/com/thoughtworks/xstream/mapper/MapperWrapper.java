@@ -38,8 +38,8 @@ public abstract class MapperWrapper implements Mapper {
         return wrapped.realMember(type, serialized);
     }
 
-    public boolean isImmutableValueType(Class type) {
-        return wrapped.isImmutableValueType(type);
+    public boolean isImmutableValueType(Class type, Context context) {
+        return wrapped.isImmutableValueType(type, context);
     }
 
     public Class defaultImplementationOf(Class type) {

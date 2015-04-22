@@ -15,6 +15,9 @@ import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.SingleValueConverter;
 
 public interface Mapper {
+
+    public static enum Context { MARSHALLING, UNMARSHALLING }
+
     /**
      * Place holder type used for null values.
      */
@@ -44,7 +47,7 @@ public interface Mapper {
      * Whether this type is a simple immutable value (int, boolean, String, URL, etc.
      * Immutable types will be repeatedly written in the serialized stream, instead of using object references.
      */
-    boolean isImmutableValueType(Class type);
+    boolean isImmutableValueType(Class type, Context context);
 
     Class defaultImplementationOf(Class type);
 

@@ -96,7 +96,7 @@ public class DefaultMapper implements Mapper {
         return attribute;
     }
 
-    public boolean isImmutableValueType(Class type) {
+    public boolean isImmutableValueType(Class type, Context context) {
         return false;
     }
 

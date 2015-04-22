@@ -1,6 +1,8 @@
 package com.thoughtworks.acceptance;
 
 import com.thoughtworks.acceptance.objects.StandardObject;
+import com.thoughtworks.acceptance.someobjects.WithNamedList;
+import com.thoughtworks.acceptance.someobjects.X;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -42,6 +44,28 @@ public class ImmutableRegistryTest extends AbstractAcceptanceTest{
                 + "</URLPair>";
 
         assertBothWays(pair, expectedXml);
+    }
+
+    public void testDocumentWithPreviouslyMutableNowImmutableMembersDeserializeOK() throws MalformedURLException{
+        xstream.alias("ThingsDocument", WithNamedList.class);
+        xstream.alias("X", X.class);
+
+        WithNamedList instance = new WithNamedList("Exes");
+        X sharedRef = new X(1);
+        instance.things.add(sharedRef);
+        instance.things.add(sharedRef);
+
+        String serialized = xstream.toXML(instance);
+
+        //act
+        xstream.addImmutableType(X.class);
+        WithNamedList deserialized = (WithNamedList) xstream.fromXML(serialized);
+
+        //assert
+        assertNotNull(deserialized);
+        assertEquals(new X(1), deserialized.things.get(0));
+        assertEquals(new X(1), deserialized.things.get(1));
+        assertEquals(2, deserialized.things.size());
     }
 
 }

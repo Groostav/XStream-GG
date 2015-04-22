@@ -46,7 +46,7 @@ public abstract class AbstractReferenceMarshaller extends TreeMarshaller impleme
     }
 
     public void convert(Object item, Converter converter) {
-        if (getMapper().isImmutableValueType(item.getClass())) {
+        if (getMapper().isImmutableValueType(item.getClass(), Mapper.Context.MARSHALLING)) {
             // strings, ints, dates, etc... don't bother using references.
             converter.marshal(item, writer, this);
         } else {
