@@ -48,7 +48,7 @@ public abstract class AbstractReferenceMarshaller extends TreeMarshaller impleme
 
     public void convert(Object item, Converter converter) {
         XStream.ReferencePathRetentionPolicy pathRetentionPolicy = getMapper().getPathRetentionPolicy(item.getClass());
-        if (pathRetentionPolicy == XStream.ReferencePathRetentionPolicy.ALWAYS) {
+        if (pathRetentionPolicy != XStream.ReferencePathRetentionPolicy.ALWAYS) {
             // strings, ints, dates, etc... don't bother using references.
             converter.marshal(item, writer, this);
         } else {
