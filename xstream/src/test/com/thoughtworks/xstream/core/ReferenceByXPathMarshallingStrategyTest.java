@@ -19,6 +19,7 @@ import com.thoughtworks.xstream.converters.ConverterLookup;
 import com.thoughtworks.xstream.core.util.ObjectIdDictionary;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import com.thoughtworks.xstream.io.path.Path;
 import com.thoughtworks.xstream.mapper.Mapper;
 
 import java.net.MalformedURLException;
@@ -167,8 +168,8 @@ public class ReferenceByXPathMarshallingStrategyTest extends AbstractAcceptanceT
         //assert
         Map trackedPathsOnUnmarshal = marshallingStrategy.requestedUnmarshaller.values;
 
-        assertTrue(trackedPathsOnUnmarshal.containsKey("/ThingsDocument/things"));
-        assertTrue(trackedPathsOnUnmarshal.containsKey("/ThingsDocument"));
+        assertTrue(trackedPathsOnUnmarshal.containsKey(new Path("/ThingsDocument/things")));
+        assertTrue(trackedPathsOnUnmarshal.containsKey(new Path("/ThingsDocument")));
         assertEquals(2, trackedPathsOnUnmarshal.size());
     }
 }

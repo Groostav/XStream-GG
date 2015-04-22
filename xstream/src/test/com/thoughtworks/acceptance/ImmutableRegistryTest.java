@@ -29,7 +29,7 @@ public class ImmutableRegistryTest extends AbstractAcceptanceTest{
         }
     }
 
-    public void documentWithImmutableMembersDontUseXPathByDefault() throws MalformedURLException{
+    public void testDocumentWithImmutableMembersDontUseXPathByDefault() throws MalformedURLException{
         xstream.alias("URLPair", URLPair.class);
 
         URL empower = new URL("http://www.empoweroperations.com");

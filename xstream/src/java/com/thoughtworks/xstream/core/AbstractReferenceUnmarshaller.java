@@ -49,8 +49,14 @@ public abstract class AbstractReferenceUnmarshaller extends TreeUnmarshaller {
             }
         }
         final Object result;
-        String attributeName = getMapper().aliasForSystemAttribute("reference");
-        String reference = attributeName == null ? null : reader.getAttribute(attributeName);
+
+        String referenceAttrName = getMapper().aliasForSystemAttribute("reference");
+        String reference = referenceAttrName == null ? null : reader.getAttribute(referenceAttrName);
+
+        if (type != null && getMapper().isImmutableValueType(type)){
+            result = super.convert(parent, type, converter);
+        }
+        else
         if (reference != null) {
             Object cache = values.get(getReferenceKey(reference));
             if (cache == null) {
