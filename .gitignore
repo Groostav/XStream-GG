@@ -51,3 +51,6 @@ xstream/.idea/copyright/*
 xstream/.idea/dictionaries/*
 xstream/.idea/uiDesigner.xml
 xstream/.idea/misc.xml
+
+#maven
+xstream/target/*
