@@ -11,8 +11,8 @@
  */
 package com.thoughtworks.xstream.mapper;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Mapper that specifies which types are basic immutable types. Types that are marked as immutable will be written
@@ -22,22 +22,41 @@ import java.util.Set;
  */
 public class ImmutableTypesMapper extends MapperWrapper {
 
-    private final Set immutableTypes = new HashSet();
+    private static final int RETAIN_ALWAYS = 0;
+    private static final int RETAIN_FOR_COMPATIBILITY = 1;
+    private static final int RETAIN_NEVER = 2;
+
+    private final Map<Class, Integer> pathRetentionByType = new HashMap<>();
 
     public ImmutableTypesMapper(Mapper wrapped) {
         super(wrapped);
     }
 
-    public void addImmutableType(Class type) {
-        immutableTypes.add(type);
+    public void addImmutableType(Class type){
+        addImmutableType(type, false);
     }
 
-    public boolean isImmutableValueType(Class type) {
-        if (immutableTypes.contains(type)) {
-            return true;
-        } else {
-            return super.isImmutableValueType(type);
-        }
+    public void addImmutableType(Class type, boolean retainPathsOnDeserialization) {
+        if(type == null) { throw new IllegalArgumentException(); }
+        pathRetentionByType.put(type, retainPathsOnDeserialization ? RETAIN_FOR_COMPATIBILITY : RETAIN_NEVER);
     }
 
+    @Override
+    public boolean isImmutableValueType(Class<?> type) {
+        return pathRetentionByType.containsKey(type)
+                ? isImmutableType(type, RETAIN_FOR_COMPATIBILITY)
+                : super.isImmutableValueType(type);
+    }
+
+    @Override
+    public boolean isImmutableValueType(Class<?> type, boolean includeBackwardsCompatibleTypes) {
+        return pathRetentionByType.containsKey(type)
+                ? isImmutableType(type, includeBackwardsCompatibleTypes ? RETAIN_FOR_COMPATIBILITY : RETAIN_NEVER)
+                : super.isImmutableValueType(type, includeBackwardsCompatibleTypes);
+    }
+
+    private boolean isImmutableType(Class<?> type, int targetLevel) {
+        int retentionPolicy = pathRetentionByType.get(type);
+        return retentionPolicy == RETAIN_NEVER || retentionPolicy == RETAIN_ALWAYS;
+    }
 }

@@ -27,12 +27,14 @@ public class ReferenceByXPathMarshallingStrategy extends AbstractTreeMarshalling
         this.mode = mode;
     }
 
-    protected TreeUnmarshaller createUnmarshallingContext(Object root,
+    @Override
+    protected ReferenceByXPathUnmarshaller createUnmarshallingContext(Object root,
         HierarchicalStreamReader reader, ConverterLookup converterLookup, Mapper mapper) {
         return new ReferenceByXPathUnmarshaller(root, reader, converterLookup, mapper);
     }
 
-    protected TreeMarshaller createMarshallingContext(
+    @Override
+    protected ReferenceByXPathMarshaller createMarshallingContext(
         HierarchicalStreamWriter writer, ConverterLookup converterLookup, Mapper mapper) {
         return new ReferenceByXPathMarshaller(writer, converterLookup, mapper, mode);
     }

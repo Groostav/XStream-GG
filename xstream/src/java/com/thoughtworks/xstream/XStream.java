@@ -11,106 +11,15 @@
  */
 package com.thoughtworks.xstream;
 
-import java.io.EOFException;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.NotActiveException;
-import java.io.ObjectInputStream;
-import java.io.ObjectInputValidation;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.Reader;
-import java.io.StringReader;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.net.URI;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.BitSet;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeMap;
-import java.util.TreeSet;
-import java.util.Vector;
-import java.util.regex.Pattern;
-
-import com.thoughtworks.xstream.converters.ConversionException;
-import com.thoughtworks.xstream.converters.Converter;
-import com.thoughtworks.xstream.converters.ConverterLookup;
-import com.thoughtworks.xstream.converters.ConverterRegistry;
-import com.thoughtworks.xstream.converters.DataHolder;
-import com.thoughtworks.xstream.converters.SingleValueConverter;
-import com.thoughtworks.xstream.converters.SingleValueConverterWrapper;
-import com.thoughtworks.xstream.converters.basic.BigDecimalConverter;
-import com.thoughtworks.xstream.converters.basic.BigIntegerConverter;
-import com.thoughtworks.xstream.converters.basic.BooleanConverter;
-import com.thoughtworks.xstream.converters.basic.ByteConverter;
-import com.thoughtworks.xstream.converters.basic.CharConverter;
-import com.thoughtworks.xstream.converters.basic.DateConverter;
-import com.thoughtworks.xstream.converters.basic.DoubleConverter;
-import com.thoughtworks.xstream.converters.basic.FloatConverter;
-import com.thoughtworks.xstream.converters.basic.IntConverter;
-import com.thoughtworks.xstream.converters.basic.LongConverter;
-import com.thoughtworks.xstream.converters.basic.NullConverter;
-import com.thoughtworks.xstream.converters.basic.ShortConverter;
-import com.thoughtworks.xstream.converters.basic.StringBufferConverter;
-import com.thoughtworks.xstream.converters.basic.StringConverter;
-import com.thoughtworks.xstream.converters.basic.URIConverter;
-import com.thoughtworks.xstream.converters.basic.URLConverter;
-import com.thoughtworks.xstream.converters.collections.ArrayConverter;
-import com.thoughtworks.xstream.converters.collections.BitSetConverter;
-import com.thoughtworks.xstream.converters.collections.CharArrayConverter;
-import com.thoughtworks.xstream.converters.collections.CollectionConverter;
-import com.thoughtworks.xstream.converters.collections.MapConverter;
-import com.thoughtworks.xstream.converters.collections.PropertiesConverter;
-import com.thoughtworks.xstream.converters.collections.SingletonCollectionConverter;
-import com.thoughtworks.xstream.converters.collections.SingletonMapConverter;
-import com.thoughtworks.xstream.converters.collections.TreeMapConverter;
-import com.thoughtworks.xstream.converters.collections.TreeSetConverter;
-import com.thoughtworks.xstream.converters.extended.ColorConverter;
-import com.thoughtworks.xstream.converters.extended.DynamicProxyConverter;
-import com.thoughtworks.xstream.converters.extended.EncodedByteArrayConverter;
-import com.thoughtworks.xstream.converters.extended.FileConverter;
-import com.thoughtworks.xstream.converters.extended.FontConverter;
-import com.thoughtworks.xstream.converters.extended.GregorianCalendarConverter;
-import com.thoughtworks.xstream.converters.extended.JavaClassConverter;
-import com.thoughtworks.xstream.converters.extended.JavaFieldConverter;
-import com.thoughtworks.xstream.converters.extended.JavaMethodConverter;
-import com.thoughtworks.xstream.converters.extended.LocaleConverter;
-import com.thoughtworks.xstream.converters.extended.LookAndFeelConverter;
-import com.thoughtworks.xstream.converters.extended.SqlDateConverter;
-import com.thoughtworks.xstream.converters.extended.SqlTimeConverter;
-import com.thoughtworks.xstream.converters.extended.SqlTimestampConverter;
-import com.thoughtworks.xstream.converters.extended.TextAttributeConverter;
+import com.thoughtworks.xstream.converters.*;
+import com.thoughtworks.xstream.converters.basic.*;
+import com.thoughtworks.xstream.converters.collections.*;
+import com.thoughtworks.xstream.converters.extended.*;
 import com.thoughtworks.xstream.converters.reflection.ExternalizableConverter;
 import com.thoughtworks.xstream.converters.reflection.ReflectionConverter;
 import com.thoughtworks.xstream.converters.reflection.ReflectionProvider;
 import com.thoughtworks.xstream.converters.reflection.SerializableConverter;
-import com.thoughtworks.xstream.core.ClassLoaderReference;
-import com.thoughtworks.xstream.core.DefaultConverterLookup;
-import com.thoughtworks.xstream.core.JVM;
-import com.thoughtworks.xstream.core.MapBackedDataHolder;
-import com.thoughtworks.xstream.core.ReferenceByIdMarshallingStrategy;
-import com.thoughtworks.xstream.core.ReferenceByXPathMarshallingStrategy;
-import com.thoughtworks.xstream.core.TreeMarshallingStrategy;
+import com.thoughtworks.xstream.core.*;
 import com.thoughtworks.xstream.core.util.CompositeClassLoader;
 import com.thoughtworks.xstream.core.util.CustomObjectInputStream;
 import com.thoughtworks.xstream.core.util.CustomObjectOutputStream;
@@ -120,34 +29,19 @@ import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.io.StatefulWriter;
 import com.thoughtworks.xstream.io.xml.XppDriver;
-import com.thoughtworks.xstream.mapper.AnnotationConfiguration;
-import com.thoughtworks.xstream.mapper.ArrayMapper;
-import com.thoughtworks.xstream.mapper.AttributeAliasingMapper;
-import com.thoughtworks.xstream.mapper.AttributeMapper;
-import com.thoughtworks.xstream.mapper.CachingMapper;
-import com.thoughtworks.xstream.mapper.ClassAliasingMapper;
-import com.thoughtworks.xstream.mapper.DefaultImplementationsMapper;
-import com.thoughtworks.xstream.mapper.DefaultMapper;
-import com.thoughtworks.xstream.mapper.DynamicProxyMapper;
-import com.thoughtworks.xstream.mapper.FieldAliasingMapper;
-import com.thoughtworks.xstream.mapper.ImmutableTypesMapper;
-import com.thoughtworks.xstream.mapper.ImplicitCollectionMapper;
-import com.thoughtworks.xstream.mapper.LocalConversionMapper;
-import com.thoughtworks.xstream.mapper.Mapper;
-import com.thoughtworks.xstream.mapper.MapperWrapper;
-import com.thoughtworks.xstream.mapper.OuterClassMapper;
-import com.thoughtworks.xstream.mapper.PackageAliasingMapper;
-import com.thoughtworks.xstream.mapper.SecurityMapper;
-import com.thoughtworks.xstream.mapper.SystemAttributeAliasingMapper;
-import com.thoughtworks.xstream.mapper.XStream11XmlFriendlyMapper;
-import com.thoughtworks.xstream.security.AnyTypePermission;
-import com.thoughtworks.xstream.security.ExplicitTypePermission;
-import com.thoughtworks.xstream.security.NoPermission;
-import com.thoughtworks.xstream.security.NoTypePermission;
-import com.thoughtworks.xstream.security.RegExpTypePermission;
-import com.thoughtworks.xstream.security.TypeHierarchyPermission;
-import com.thoughtworks.xstream.security.TypePermission;
-import com.thoughtworks.xstream.security.WildcardTypePermission;
+import com.thoughtworks.xstream.mapper.*;
+import com.thoughtworks.xstream.security.*;
+
+import java.io.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.net.URI;
+import java.net.URL;
+import java.util.*;
+import java.util.regex.Pattern;
 
 
 /**
@@ -928,37 +822,36 @@ public class XStream {
             return;
         }
 
-        // primitives are always immutable
-        addImmutableType(boolean.class);
-        addImmutableType(Boolean.class);
-        addImmutableType(byte.class);
-        addImmutableType(Byte.class);
-        addImmutableType(char.class);
-        addImmutableType(Character.class);
-        addImmutableType(double.class);
-        addImmutableType(Double.class);
-        addImmutableType(float.class);
-        addImmutableType(Float.class);
-        addImmutableType(int.class);
-        addImmutableType(Integer.class);
-        addImmutableType(long.class);
-        addImmutableType(Long.class);
-        addImmutableType(short.class);
-        addImmutableType(Short.class);
+        // primitives are always immutable                  //retainPathsOnDeserialization
+        addImmutableType(boolean.class,                     false);
+        addImmutableType(Boolean.class,                     false);
+        addImmutableType(byte.class,                        false);
+        addImmutableType(Byte.class,                        false);
+        addImmutableType(char.class,                        false);
+        addImmutableType(double.class,                      false);
+        addImmutableType(Double.class,                      false);
+        addImmutableType(float.class,                       false);
+        addImmutableType(Float.class,                       false);
+        addImmutableType(int.class,                         false);
+        addImmutableType(Integer.class,                     false);
+        addImmutableType(long.class,                        false);
+        addImmutableType(Long.class,                        false);
+        addImmutableType(short.class,                       false);
+        addImmutableType(Short.class,                       false);
 
         // additional types
-        addImmutableType(Mapper.Null.class);
-        addImmutableType(BigDecimal.class);
-        addImmutableType(BigInteger.class);
-        addImmutableType(String.class);
-        addImmutableType(URI.class);
-        addImmutableType(URL.class);
-        addImmutableType(File.class);
-        addImmutableType(Class.class);
+        addImmutableType(Mapper.Null.class,                 false);
+        addImmutableType(BigDecimal.class,                  false);
+        addImmutableType(BigInteger.class,                  false);
+        addImmutableType(String.class,                      false);
+        addImmutableType(URI.class,                         false);
+        addImmutableType(URL.class,                         false);
+        addImmutableType(File.class,                        false);
+        addImmutableType(Class.class,                       false);
 
-        addImmutableType(Collections.EMPTY_LIST.getClass());
-        addImmutableType(Collections.EMPTY_SET.getClass());
-        addImmutableType(Collections.EMPTY_MAP.getClass());
+        addImmutableType(Collections.EMPTY_LIST.getClass(), false);
+        addImmutableType(Collections.EMPTY_SET.getClass(),  false);
+        addImmutableType(Collections.EMPTY_MAP.getClass(),  false);
 
         if (JVM.isAWTAvailable()) {
             addImmutableTypeDynamically("java.awt.font.TextAttribute");
@@ -1416,18 +1309,37 @@ public class XStream {
     }
 
     /**
-     * Add immutable types. The value of the instances of these types will always be written
-     * into the stream even if they appear multiple times.
-     * 
+     * Register an immutable type. Instances of immutable types will always be written
+     * into the stream (as a full document instead of a reference) even if they appear multiple times.
+     *
+     * <p>a reference map will be built at unmarshalling time anyways so that documents of an
+     * earlier version (where the <tt>type</tt> was <i>not</i> registered as immutable) will
+     * still be deserialized properly. Use {@link #addImmutableType(Class, boolean)}
+     * if this is not desired.
+     *
      * @throws InitializationException if no {@link ImmutableTypesMapper} is available
      */
     public void addImmutableType(Class type) {
+        addImmutableType(type, true);
+    }
+    /**
+     * Register an immutable type. Instances of immutable types will always be written
+     * into the stream (as a full document instead of a reference) even if they appear multiple times.
+     *
+     * <p>a reference map will be built at unmarshalling time if the <tt>retainPathsOnUnmarshal</tt>
+     * is <tt>true</tt>, else at unmarshalling time
+     * the reference map will not be populated by immutable objects, and any existing documents that
+     * contain references to immutable types will not be deserializable by this configuration.</p>
+     *
+     * @throws InitializationException if no {@link ImmutableTypesMapper} is available
+     */
+    public void addImmutableType(Class type, boolean retainPathsOnUnmarshal) {
         if (immutableTypesMapper == null) {
             throw new com.thoughtworks.xstream.InitializationException("No "
                 + ImmutableTypesMapper.class.getName()
                 + " available");
         }
-        immutableTypesMapper.addImmutableType(type);
+        immutableTypesMapper.addImmutableType(type, retainPathsOnUnmarshal);
     }
 
     public void registerConverter(Converter converter) {
