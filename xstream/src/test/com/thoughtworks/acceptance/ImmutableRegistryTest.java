@@ -3,6 +3,7 @@ package com.thoughtworks.acceptance;
 import com.thoughtworks.acceptance.objects.StandardObject;
 import com.thoughtworks.acceptance.someobjects.WithNamedList;
 import com.thoughtworks.acceptance.someobjects.X;
+import com.thoughtworks.xstream.converters.ConversionException;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -66,6 +67,26 @@ public class ImmutableRegistryTest extends AbstractAcceptanceTest{
         assertEquals(new X(1), deserialized.things.get(0));
         assertEquals(new X(1), deserialized.things.get(1));
         assertEquals(2, deserialized.things.size());
+    }
+
+    public void testDeserializingTypeRegisteredAsImmutableThrowsNiceError() throws MalformedURLException {
+        xstream.alias("URLPair", URLPair.class);
+
+        String problemDocument = "" //
+                + "<URLPair>\n" //
+                + "  <source>http://www.empoweroperations.com</source>\n" //
+                + "  <destination reference=\"../source\">\n" //
+                + "</URLPair>";
+
+        try{
+            xstream.fromXML(problemDocument);
+        }
+        catch(ConversionException e){
+            assertEquals(e.get("class"), "java.net.URL");
+            assertTrue(e.getMessage().contains("Invalid reference"));
+            assertTrue(e.getMessage().contains("no references to any instances of that class are kept"));
+            assertTrue(e.getMessage().contains("because it is immutable"));
+        }
     }
 
 }
