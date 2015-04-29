@@ -52,7 +52,7 @@ public abstract class AbstractReferenceUnmarshaller extends TreeUnmarshaller {
 
         String referenceAttrName = getMapper().aliasForSystemAttribute("reference");
         String reference = referenceAttrName == null ? null : reader.getAttribute(referenceAttrName);
-        boolean isImmutable = type != null && getMapper().isImmutableValueType(type, false);
+        boolean isImmutable = type != null && getMapper().isImmutableValueType(type, /*includeBackwardCompatibleTypes*/false);
 
         if (reference == null && isImmutable){
             //if reference is not null but type is declared as not using refs, its possible the ref is to

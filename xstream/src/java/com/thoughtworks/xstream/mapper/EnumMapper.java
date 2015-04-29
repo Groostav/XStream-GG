@@ -63,9 +63,10 @@ public class EnumMapper extends MapperWrapper implements Caching {
         }
     }
 
+
     @Override
     public boolean isImmutableValueType(Class type) {
-        return (Enum.class.isAssignableFrom(type)) || super.isImmutableValueType(type);
+        return Enum.class.isAssignableFrom(type) || super.isImmutableValueType(type);
     }
 
     @Override
