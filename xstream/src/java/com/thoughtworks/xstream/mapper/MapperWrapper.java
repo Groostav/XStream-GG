@@ -14,7 +14,15 @@ package com.thoughtworks.xstream.mapper;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.SingleValueConverter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public abstract class MapperWrapper implements Mapper {
+
+    private static final ThreadLocal<Set<Class>> inspectingTypes = new ThreadLocal<Set<Class>>(){
+        protected Set<Class> initialValue() { return new HashSet<>(); }
+    };
+
 
     private final Mapper wrapped;
 
@@ -38,8 +46,14 @@ public abstract class MapperWrapper implements Mapper {
         return wrapped.realMember(type, serialized);
     }
 
-    public boolean isImmutableValueType(Class type) {
+    public boolean isImmutableValueType(Class<?> type) {
         return wrapped.isImmutableValueType(type);
+    }
+
+    public boolean isImmutableValueType(Class<?> type, boolean includeBackwardsCompatibleTypes) {
+
+        return isImmutableValueType(type)
+                || wrapped.isImmutableValueType(type, includeBackwardsCompatibleTypes);
     }
 
     public Class defaultImplementationOf(Class type) {

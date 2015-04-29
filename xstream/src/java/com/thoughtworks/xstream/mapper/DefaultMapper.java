@@ -96,7 +96,11 @@ public class DefaultMapper implements Mapper {
         return attribute;
     }
 
-    public boolean isImmutableValueType(Class type) {
+    public boolean isImmutableValueType(Class<?> type) {
+        return false;
+    }
+
+    public boolean isImmutableValueType(Class<?> type, boolean includeBackwardsCompatibleTypes) {
         return false;
     }
 

@@ -19,7 +19,6 @@ import com.thoughtworks.xstream.converters.reflection.PureJavaReflectionProvider
 import com.thoughtworks.xstream.converters.reflection.XStream12FieldKeySorter;
 import com.thoughtworks.xstream.core.ReferenceByXPathMarshallingStrategy;
 import com.thoughtworks.xstream.core.ReferenceByXPathUnmarshaller;
-import com.thoughtworks.xstream.core.TreeUnmarshaller;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.mapper.Mapper;
 
@@ -135,7 +134,7 @@ public class XStream12CompatibilityTest extends AbstractAcceptanceTest {
     public void testCanReadXmlUnfriendlyXPathReferences() {
         xstream.setMarshallingStrategy(new ReferenceByXPathMarshallingStrategy(ReferenceByXPathMarshallingStrategy.RELATIVE) {
 
-            protected TreeUnmarshaller createUnmarshallingContext(Object root,
+            protected ReferenceByXPathUnmarshaller createUnmarshallingContext(Object root,
                 HierarchicalStreamReader reader, ConverterLookup converterLookup, Mapper mapper) {
                 return new XStream12ReferenceByXPathUnmarshaller(root, reader, converterLookup, mapper);
             }

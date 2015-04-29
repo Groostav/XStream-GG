@@ -10,15 +10,15 @@
  */
 package com.thoughtworks.xstream.core;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.thoughtworks.xstream.converters.ConversionException;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.ConverterLookup;
 import com.thoughtworks.xstream.core.util.FastStack;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.mapper.Mapper;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Abstract base class for a TreeUnmarshaller, that resolves references.
@@ -31,7 +31,7 @@ import com.thoughtworks.xstream.mapper.Mapper;
 public abstract class AbstractReferenceUnmarshaller extends TreeUnmarshaller {
 
     private static final Object NULL = new Object();
-    private Map values = new HashMap();
+    /*Visible For Testing*/ Map values = new HashMap();
     private FastStack parentStack = new FastStack(16);
 
     public AbstractReferenceUnmarshaller(Object root, HierarchicalStreamReader reader,
@@ -49,15 +49,18 @@ public abstract class AbstractReferenceUnmarshaller extends TreeUnmarshaller {
             }
         }
         final Object result;
-        String attributeName = getMapper().aliasForSystemAttribute("reference");
-        String reference = attributeName == null ? null : reader.getAttribute(attributeName);
-        if (reference != null) {
+
+        String referenceAttrName = getMapper().aliasForSystemAttribute("reference");
+        String reference = referenceAttrName == null ? null : reader.getAttribute(referenceAttrName);
+        boolean isImmutable = type != null && getMapper().isImmutableValueType(type, false);
+
+        if (reference == null && isImmutable){
+            //if reference is not null but type is declared as not using refs, its possible the ref is to
+            //a subclass instance somewhere else on the document, so treat it normally.
+            result = super.convert(parent, type, converter);
+        } else if (reference != null) {
             Object cache = values.get(getReferenceKey(reference));
-            if (cache == null) {
-                final ConversionException ex = new ConversionException("Invalid reference");
-                ex.add("reference", reference);
-                throw ex;
-            } 
+            throwIfReferenceIsBad(type, reference, isImmutable, cache);
             result = cache == NULL ? null : cache;
         } else {
             Object currentReferenceKey = getCurrentReferenceKey();
@@ -70,7 +73,24 @@ public abstract class AbstractReferenceUnmarshaller extends TreeUnmarshaller {
         }
         return result;
     }
-    
+
+    private void throwIfReferenceIsBad(Class type, String reference, boolean isImmutable, Object referant) {
+        if (referant != null) {
+            return;
+        }
+
+        String msg = "Invalid reference";
+        msg = isImmutable
+                ? msg + ", no references to any instances of that class are kept because it is immutable"
+                : msg;
+
+        final ConversionException ex = new ConversionException(msg);
+        ex.add("class", type == null ? "not available" : type.getCanonicalName());
+        ex.add("reference", reference);
+
+        throw ex;
+    }
+
     protected abstract Object getReferenceKey(String reference);
     protected abstract Object getCurrentReferenceKey();
 }
