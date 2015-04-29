@@ -11,7 +11,6 @@
  */
 package com.thoughtworks.xstream.mapper;
 
-import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.SingleValueConverter;
 
@@ -39,8 +38,14 @@ public abstract class MapperWrapper implements Mapper {
         return wrapped.realMember(type, serialized);
     }
 
-    public XStream.ReferencePathRetentionPolicy getPathRetentionPolicy(Class type) {
-        return wrapped.getPathRetentionPolicy(type);
+    public boolean isImmutableValueType(Class<?> type) {
+        return wrapped.isImmutableValueType(type);
+    }
+
+    public boolean isImmutableValueType(Class<?> type, boolean includeBackwardsCompatibleTypes) {
+
+        return isImmutableValueType(type)
+                || wrapped.isImmutableValueType(type, includeBackwardsCompatibleTypes);
     }
 
     public Class defaultImplementationOf(Class type) {

@@ -11,7 +11,6 @@
  */
 package com.thoughtworks.xstream.mapper;
 
-import com.thoughtworks.xstream.XStream.ReferencePathRetentionPolicy;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.SingleValueConverter;
 
@@ -43,30 +42,19 @@ public interface Mapper {
     String realMember(Class type, String serialized);
 
     /**
-     * Gets the reference-path retention policy for the specified type.
-     *
-     * <p>By default:
-     * <ul>
-     *     <li>System immutable types are registered as {@link ReferencePathRetentionPolicy#NEVER}, meaning
-     *      any time a serializer or deserializer encounters an instance of that type, it need not
-     *      make a reference path for it.</li>
-     *
-     *      <li>User defined immutable types are registered as
-     *      {@link ReferencePathRetentionPolicy#BACKWARDS_COMPATIBLE},
-     *      which means that the serializer doesn't need to keep the path references,
-     *      but that the deserializer does (since older documents may still be using
-     *      that path)</li>
-     *
-     *      <li>All other types are {@link ReferencePathRetentionPolicy#ALWAYS},
-     *      meaning that both marshallers and unmarshallers
-     *      need to keep a document-path reference to every object of that type they
-     *      encounter</li>
-     * </ul>
-     *
-     * @return the reference path retention policy for marshallers and unmarshallers regarding the specified <tt>type</tt>
-     * @since 1.4.9
+     * Whether this type is a simple immutable value (int, boolean, String, URL, etc. Immutable types will be repeatedly
+     * written in the serialized stream, instead of using object references.
      */
-    ReferencePathRetentionPolicy getPathRetentionPolicy(Class type);
+    boolean isImmutableValueType(Class<?> type);
+
+    /**
+     * Whether this type is a simple immutable value (int, boolean, String, URL, etc. Immutable types will be repeatedly
+     * written in the serialized stream, instead of using object references.
+     *
+     * @param includeBackwardsCompatibleTypes specifies whether or not to include a type
+     *                                        that was registered as backwardsCompatible Immutable.
+     */
+    boolean isImmutableValueType(Class<?> type, boolean includeBackwardsCompatibleTypes);
 
     Class defaultImplementationOf(Class type);
 

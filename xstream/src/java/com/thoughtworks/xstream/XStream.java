@@ -223,8 +223,6 @@ public class XStream {
     public static final int SINGLE_NODE_XPATH_RELATIVE_REFERENCES = 1005;
     public static final int SINGLE_NODE_XPATH_ABSOLUTE_REFERENCES = 1006;
 
-    public static enum ReferencePathRetentionPolicy { ALWAYS, BACKWARDS_COMPATIBLE, NEVER }
-
     public static final int PRIORITY_VERY_HIGH = 10000;
     public static final int PRIORITY_NORMAL = 0;
     public static final int PRIORITY_LOW = -10;
@@ -824,36 +822,36 @@ public class XStream {
             return;
         }
 
-        // primitives are always immutable
-        addImmutableType(boolean.class,     ReferencePathRetentionPolicy.NEVER);
-        addImmutableType(Boolean.class,     ReferencePathRetentionPolicy.NEVER);
-        addImmutableType(byte.class,        ReferencePathRetentionPolicy.NEVER);
-        addImmutableType(Byte.class,        ReferencePathRetentionPolicy.NEVER);
-        addImmutableType(char.class,        ReferencePathRetentionPolicy.NEVER);
-        addImmutableType(double.class,      ReferencePathRetentionPolicy.NEVER);
-        addImmutableType(Double.class,      ReferencePathRetentionPolicy.NEVER);
-        addImmutableType(float.class,       ReferencePathRetentionPolicy.NEVER);
-        addImmutableType(Float.class,       ReferencePathRetentionPolicy.NEVER);
-        addImmutableType(int.class,         ReferencePathRetentionPolicy.NEVER);
-        addImmutableType(Integer.class,     ReferencePathRetentionPolicy.NEVER);
-        addImmutableType(long.class,        ReferencePathRetentionPolicy.NEVER);
-        addImmutableType(Long.class,        ReferencePathRetentionPolicy.NEVER);
-        addImmutableType(short.class,       ReferencePathRetentionPolicy.NEVER);
-        addImmutableType(Short.class,       ReferencePathRetentionPolicy.NEVER);
+        // primitives are always immutable                  //retainPathsOnDeserialization
+        addImmutableType(boolean.class,                     false);
+        addImmutableType(Boolean.class,                     false);
+        addImmutableType(byte.class,                        false);
+        addImmutableType(Byte.class,                        false);
+        addImmutableType(char.class,                        false);
+        addImmutableType(double.class,                      false);
+        addImmutableType(Double.class,                      false);
+        addImmutableType(float.class,                       false);
+        addImmutableType(Float.class,                       false);
+        addImmutableType(int.class,                         false);
+        addImmutableType(Integer.class,                     false);
+        addImmutableType(long.class,                        false);
+        addImmutableType(Long.class,                        false);
+        addImmutableType(short.class,                       false);
+        addImmutableType(Short.class,                       false);
 
         // additional types
-        addImmutableType(Mapper.Null.class, ReferencePathRetentionPolicy.NEVER);
-        addImmutableType(BigDecimal.class,  ReferencePathRetentionPolicy.NEVER);
-        addImmutableType(BigInteger.class,  ReferencePathRetentionPolicy.NEVER);
-        addImmutableType(String.class,      ReferencePathRetentionPolicy.NEVER);
-        addImmutableType(URI.class,         ReferencePathRetentionPolicy.NEVER);
-        addImmutableType(URL.class,         ReferencePathRetentionPolicy.NEVER);
-        addImmutableType(File.class,        ReferencePathRetentionPolicy.NEVER);
-        addImmutableType(Class.class,       ReferencePathRetentionPolicy.NEVER);
+        addImmutableType(Mapper.Null.class,                 false);
+        addImmutableType(BigDecimal.class,                  false);
+        addImmutableType(BigInteger.class,                  false);
+        addImmutableType(String.class,                      false);
+        addImmutableType(URI.class,                         false);
+        addImmutableType(URL.class,                         false);
+        addImmutableType(File.class,                        false);
+        addImmutableType(Class.class,                       false);
 
-        addImmutableType(Collections.EMPTY_LIST.getClass(), ReferencePathRetentionPolicy.NEVER);
-        addImmutableType(Collections.EMPTY_SET.getClass(),  ReferencePathRetentionPolicy.NEVER);
-        addImmutableType(Collections.EMPTY_MAP.getClass(),  ReferencePathRetentionPolicy.NEVER);
+        addImmutableType(Collections.EMPTY_LIST.getClass(), false);
+        addImmutableType(Collections.EMPTY_SET.getClass(),  false);
+        addImmutableType(Collections.EMPTY_MAP.getClass(),  false);
 
         if (JVM.isAWTAvailable()) {
             addImmutableTypeDynamically("java.awt.font.TextAttribute");
@@ -1316,32 +1314,32 @@ public class XStream {
      *
      * <p>a reference map will be built at unmarshalling time anyways so that documents of an
      * earlier version (where the <tt>type</tt> was <i>not</i> registered as immutable) will
-     * still be deserialized properly. Use {@link #addImmutableType(Class, ReferencePathRetentionPolicy)}
+     * still be deserialized properly. Use {@link #addImmutableType(Class, boolean)}
      * if this is not desired.
      *
      * @throws InitializationException if no {@link ImmutableTypesMapper} is available
      */
     public void addImmutableType(Class type) {
-        addImmutableType(type, ReferencePathRetentionPolicy.BACKWARDS_COMPATIBLE);
+        addImmutableType(type, true);
     }
     /**
      * Register an immutable type. Instances of immutable types will always be written
      * into the stream (as a full document instead of a reference) even if they appear multiple times.
      *
-     * <p>a reference map will be built at unmarshalling time if the specified <tt>retentionPolicy</tt>
-     * is {@link ReferencePathRetentionPolicy.BACKWARDS_COMPATIBLE}, else at unmarshalling time
+     * <p>a reference map will be built at unmarshalling time if the <tt>retainPathsOnUnmarshal</tt>
+     * is <tt>true</tt>, else at unmarshalling time
      * the reference map will not be populated by immutable objects, and any existing documents that
      * contain references to immutable types will not be deserializable by this configuration.</p>
      *
      * @throws InitializationException if no {@link ImmutableTypesMapper} is available
      */
-    public void addImmutableType(Class type, ReferencePathRetentionPolicy retentionPolicy) {
+    public void addImmutableType(Class type, boolean retainPathsOnUnmarshal) {
         if (immutableTypesMapper == null) {
             throw new com.thoughtworks.xstream.InitializationException("No "
                 + ImmutableTypesMapper.class.getName()
                 + " available");
         }
-        immutableTypesMapper.addImmutableType(type, retentionPolicy);
+        immutableTypesMapper.addImmutableType(type, retainPathsOnUnmarshal);
     }
 
     public void registerConverter(Converter converter) {

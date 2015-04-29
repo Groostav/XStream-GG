@@ -10,7 +10,6 @@
  */
 package com.thoughtworks.xstream.core;
 
-import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.ConversionException;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.ConverterLookup;
@@ -47,8 +46,8 @@ public abstract class AbstractReferenceMarshaller extends TreeMarshaller impleme
     }
 
     public void convert(Object item, Converter converter) {
-        XStream.ReferencePathRetentionPolicy pathRetentionPolicy = getMapper().getPathRetentionPolicy(item.getClass());
-        if (pathRetentionPolicy != XStream.ReferencePathRetentionPolicy.ALWAYS) {
+
+        if (getMapper().isImmutableValueType(item.getClass(), true)) {
             // strings, ints, dates, etc... don't bother using references.
             converter.marshal(item, writer, this);
         } else {

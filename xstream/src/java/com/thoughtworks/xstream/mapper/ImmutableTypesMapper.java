@@ -11,8 +11,6 @@
  */
 package com.thoughtworks.xstream.mapper;
 
-import com.thoughtworks.xstream.XStream;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,21 +22,41 @@ import java.util.Map;
  */
 public class ImmutableTypesMapper extends MapperWrapper {
 
-    private final Map<Class, XStream.ReferencePathRetentionPolicy> pathRetentionByType = new HashMap<>();
+    private static final int RETAIN_ALWAYS = 0;
+    private static final int RETAIN_FOR_COMPATIBILITY = 1;
+    private static final int RETAIN_NEVER = 2;
+
+    private final Map<Class, Integer> pathRetentionByType = new HashMap<>();
 
     public ImmutableTypesMapper(Mapper wrapped) {
         super(wrapped);
     }
 
-    public void addImmutableType(Class type, XStream.ReferencePathRetentionPolicy retentionPolicy) {
-        if(type == null || retentionPolicy == null) { throw new IllegalArgumentException(); }
-        pathRetentionByType.put(type, retentionPolicy);
+    public void addImmutableType(Class type){
+        addImmutableType(type, false);
     }
 
-    public XStream.ReferencePathRetentionPolicy getPathRetentionPolicy(Class type) {
+    public void addImmutableType(Class type, boolean retainPathsOnDeserialization) {
+        if(type == null) { throw new IllegalArgumentException(); }
+        pathRetentionByType.put(type, retainPathsOnDeserialization ? RETAIN_FOR_COMPATIBILITY : RETAIN_NEVER);
+    }
+
+    @Override
+    public boolean isImmutableValueType(Class<?> type) {
         return pathRetentionByType.containsKey(type)
-                ? pathRetentionByType.get(type)
-                : super.getPathRetentionPolicy(type);
+                ? isImmutableType(type, RETAIN_FOR_COMPATIBILITY)
+                : super.isImmutableValueType(type);
     }
 
+    @Override
+    public boolean isImmutableValueType(Class<?> type, boolean includeBackwardsCompatibleTypes) {
+        return pathRetentionByType.containsKey(type)
+                ? isImmutableType(type, includeBackwardsCompatibleTypes ? RETAIN_FOR_COMPATIBILITY : RETAIN_NEVER)
+                : super.isImmutableValueType(type, includeBackwardsCompatibleTypes);
+    }
+
+    private boolean isImmutableType(Class<?> type, int targetLevel) {
+        int retentionPolicy = pathRetentionByType.get(type);
+        return retentionPolicy == RETAIN_NEVER || retentionPolicy == RETAIN_ALWAYS;
+    }
 }
