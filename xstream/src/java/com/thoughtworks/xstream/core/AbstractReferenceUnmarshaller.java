@@ -31,7 +31,7 @@ import java.util.Map;
 public abstract class AbstractReferenceUnmarshaller extends TreeUnmarshaller {
 
     private static final Object NULL = new Object();
-    /*Visible For Testing*/ Map values = new HashMap();
+    /*Visible For Testing*/ Map instancesByDocPath = new HashMap();
     private FastStack parentStack = new FastStack(16);
 
     public AbstractReferenceUnmarshaller(Object root, HierarchicalStreamReader reader,
@@ -43,8 +43,8 @@ public abstract class AbstractReferenceUnmarshaller extends TreeUnmarshaller {
         if (parentStack.size() > 0) { // handles circular references
             Object parentReferenceKey = parentStack.peek();
             if (parentReferenceKey != null) {
-                if (!values.containsKey(parentReferenceKey)) { // see AbstractCircularReferenceTest.testWeirdCircularReference()
-                    values.put(parentReferenceKey, parent);
+                if (!instancesByDocPath.containsKey(parentReferenceKey)) { // see AbstractCircularReferenceTest.testWeirdCircularReference()
+                    instancesByDocPath.put(parentReferenceKey, parent);
                 }
             }
         }
@@ -55,11 +55,12 @@ public abstract class AbstractReferenceUnmarshaller extends TreeUnmarshaller {
         boolean needsReference = type == null || ! getMapper().isImmutableValueType(type) || getMapper().canBeReferencedByPath(type);
 
         if (reference == null && ! needsReference){
-            //if reference is not null but type is declared as not using refs, its possible the ref is to
-            //a subclass instance somewhere else on the document, so treat it normally.
+            //if reference is not null but type is declared as not needing refs,
+            // its feasible that the ref is to a subclass instance somewhere else on the document,
+            // so treat it normally.
             result = super.convert(parent, type, converter);
         } else if (reference != null) {
-            Object cache = values.get(getReferenceKey(reference));
+            Object cache = instancesByDocPath.get(getReferenceKey(reference));
             throwIfReferenceIsBad(type, reference, ! needsReference, cache);
             result = cache == NULL ? null : cache;
         } else {
@@ -67,7 +68,7 @@ public abstract class AbstractReferenceUnmarshaller extends TreeUnmarshaller {
             parentStack.push(currentReferenceKey);
             result = super.convert(parent, type, converter);
             if (currentReferenceKey != null) {
-                values.put(currentReferenceKey, result == null ? NULL : result);
+                instancesByDocPath.put(currentReferenceKey, result == null ? NULL : result);
             }
             parentStack.popSilently();
         }
