@@ -11,106 +11,15 @@
  */
 package com.thoughtworks.xstream;
 
-import java.io.EOFException;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.NotActiveException;
-import java.io.ObjectInputStream;
-import java.io.ObjectInputValidation;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.Reader;
-import java.io.StringReader;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.net.URI;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.BitSet;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeMap;
-import java.util.TreeSet;
-import java.util.Vector;
-import java.util.regex.Pattern;
-
-import com.thoughtworks.xstream.converters.ConversionException;
-import com.thoughtworks.xstream.converters.Converter;
-import com.thoughtworks.xstream.converters.ConverterLookup;
-import com.thoughtworks.xstream.converters.ConverterRegistry;
-import com.thoughtworks.xstream.converters.DataHolder;
-import com.thoughtworks.xstream.converters.SingleValueConverter;
-import com.thoughtworks.xstream.converters.SingleValueConverterWrapper;
-import com.thoughtworks.xstream.converters.basic.BigDecimalConverter;
-import com.thoughtworks.xstream.converters.basic.BigIntegerConverter;
-import com.thoughtworks.xstream.converters.basic.BooleanConverter;
-import com.thoughtworks.xstream.converters.basic.ByteConverter;
-import com.thoughtworks.xstream.converters.basic.CharConverter;
-import com.thoughtworks.xstream.converters.basic.DateConverter;
-import com.thoughtworks.xstream.converters.basic.DoubleConverter;
-import com.thoughtworks.xstream.converters.basic.FloatConverter;
-import com.thoughtworks.xstream.converters.basic.IntConverter;
-import com.thoughtworks.xstream.converters.basic.LongConverter;
-import com.thoughtworks.xstream.converters.basic.NullConverter;
-import com.thoughtworks.xstream.converters.basic.ShortConverter;
-import com.thoughtworks.xstream.converters.basic.StringBufferConverter;
-import com.thoughtworks.xstream.converters.basic.StringConverter;
-import com.thoughtworks.xstream.converters.basic.URIConverter;
-import com.thoughtworks.xstream.converters.basic.URLConverter;
-import com.thoughtworks.xstream.converters.collections.ArrayConverter;
-import com.thoughtworks.xstream.converters.collections.BitSetConverter;
-import com.thoughtworks.xstream.converters.collections.CharArrayConverter;
-import com.thoughtworks.xstream.converters.collections.CollectionConverter;
-import com.thoughtworks.xstream.converters.collections.MapConverter;
-import com.thoughtworks.xstream.converters.collections.PropertiesConverter;
-import com.thoughtworks.xstream.converters.collections.SingletonCollectionConverter;
-import com.thoughtworks.xstream.converters.collections.SingletonMapConverter;
-import com.thoughtworks.xstream.converters.collections.TreeMapConverter;
-import com.thoughtworks.xstream.converters.collections.TreeSetConverter;
-import com.thoughtworks.xstream.converters.extended.ColorConverter;
-import com.thoughtworks.xstream.converters.extended.DynamicProxyConverter;
-import com.thoughtworks.xstream.converters.extended.EncodedByteArrayConverter;
-import com.thoughtworks.xstream.converters.extended.FileConverter;
-import com.thoughtworks.xstream.converters.extended.FontConverter;
-import com.thoughtworks.xstream.converters.extended.GregorianCalendarConverter;
-import com.thoughtworks.xstream.converters.extended.JavaClassConverter;
-import com.thoughtworks.xstream.converters.extended.JavaFieldConverter;
-import com.thoughtworks.xstream.converters.extended.JavaMethodConverter;
-import com.thoughtworks.xstream.converters.extended.LocaleConverter;
-import com.thoughtworks.xstream.converters.extended.LookAndFeelConverter;
-import com.thoughtworks.xstream.converters.extended.SqlDateConverter;
-import com.thoughtworks.xstream.converters.extended.SqlTimeConverter;
-import com.thoughtworks.xstream.converters.extended.SqlTimestampConverter;
-import com.thoughtworks.xstream.converters.extended.TextAttributeConverter;
+import com.thoughtworks.xstream.converters.*;
+import com.thoughtworks.xstream.converters.basic.*;
+import com.thoughtworks.xstream.converters.collections.*;
+import com.thoughtworks.xstream.converters.extended.*;
 import com.thoughtworks.xstream.converters.reflection.ExternalizableConverter;
 import com.thoughtworks.xstream.converters.reflection.ReflectionConverter;
 import com.thoughtworks.xstream.converters.reflection.ReflectionProvider;
 import com.thoughtworks.xstream.converters.reflection.SerializableConverter;
-import com.thoughtworks.xstream.core.ClassLoaderReference;
-import com.thoughtworks.xstream.core.DefaultConverterLookup;
-import com.thoughtworks.xstream.core.JVM;
-import com.thoughtworks.xstream.core.MapBackedDataHolder;
-import com.thoughtworks.xstream.core.ReferenceByIdMarshallingStrategy;
-import com.thoughtworks.xstream.core.ReferenceByXPathMarshallingStrategy;
-import com.thoughtworks.xstream.core.TreeMarshallingStrategy;
+import com.thoughtworks.xstream.core.*;
 import com.thoughtworks.xstream.core.util.CompositeClassLoader;
 import com.thoughtworks.xstream.core.util.CustomObjectInputStream;
 import com.thoughtworks.xstream.core.util.CustomObjectOutputStream;
@@ -120,34 +29,20 @@ import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.io.StatefulWriter;
 import com.thoughtworks.xstream.io.xml.XppDriver;
-import com.thoughtworks.xstream.mapper.AnnotationConfiguration;
-import com.thoughtworks.xstream.mapper.ArrayMapper;
-import com.thoughtworks.xstream.mapper.AttributeAliasingMapper;
-import com.thoughtworks.xstream.mapper.AttributeMapper;
-import com.thoughtworks.xstream.mapper.CachingMapper;
-import com.thoughtworks.xstream.mapper.ClassAliasingMapper;
-import com.thoughtworks.xstream.mapper.DefaultImplementationsMapper;
-import com.thoughtworks.xstream.mapper.DefaultMapper;
-import com.thoughtworks.xstream.mapper.DynamicProxyMapper;
-import com.thoughtworks.xstream.mapper.FieldAliasingMapper;
-import com.thoughtworks.xstream.mapper.ImmutableTypesMapper;
-import com.thoughtworks.xstream.mapper.ImplicitCollectionMapper;
-import com.thoughtworks.xstream.mapper.LocalConversionMapper;
-import com.thoughtworks.xstream.mapper.Mapper;
-import com.thoughtworks.xstream.mapper.MapperWrapper;
-import com.thoughtworks.xstream.mapper.OuterClassMapper;
-import com.thoughtworks.xstream.mapper.PackageAliasingMapper;
-import com.thoughtworks.xstream.mapper.SecurityMapper;
-import com.thoughtworks.xstream.mapper.SystemAttributeAliasingMapper;
-import com.thoughtworks.xstream.mapper.XStream11XmlFriendlyMapper;
-import com.thoughtworks.xstream.security.AnyTypePermission;
-import com.thoughtworks.xstream.security.ExplicitTypePermission;
-import com.thoughtworks.xstream.security.NoPermission;
-import com.thoughtworks.xstream.security.NoTypePermission;
-import com.thoughtworks.xstream.security.RegExpTypePermission;
-import com.thoughtworks.xstream.security.TypeHierarchyPermission;
-import com.thoughtworks.xstream.security.TypePermission;
-import com.thoughtworks.xstream.security.WildcardTypePermission;
+import com.thoughtworks.xstream.mapper.*;
+import com.thoughtworks.xstream.security.*;
+
+import java.io.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.net.URI;
+import java.net.URL;
+import java.util.*;
+import java.util.regex.Pattern;
 
 
 /**
@@ -766,6 +661,27 @@ public class XStream {
         if (JVM.loadClassForName("java.lang.invoke.SerializedLambda") != null) {
             aliasDynamically("serialized-lambda", "java.lang.invoke.SerializedLambda");
         }
+
+        if(JVM.is18()) {
+            alias("instant",            JVM.loadClassForName("java.time.Instant"));
+            alias("local-time",         JVM.loadClassForName("java.time.LocalTime"));
+            alias("local-date-time",    JVM.loadClassForName("java.time.LocalDateTime"));
+            alias("local-date",         JVM.loadClassForName("java.time.LocalDate"));
+
+            alias("hijrah-date",        JVM.loadClassForName("java.time.chrono.HijrahDate"));
+            alias("japanese-date",      JVM.loadClassForName("java.time.chrono.JapaneseDate"));
+            alias("minguo-date",        JVM.loadClassForName("java.time.chrono.MinguoDate"));
+            alias("thai-date",          JVM.loadClassForName("java.time.chrono.ThaiBuddhistDate"));
+
+            alias("offset-date-time",   JVM.loadClassForName("java.time.OffsetDateTime"));
+            alias("offset-time",        JVM.loadClassForName("java.time.OffsetTime"));
+            alias("year",               JVM.loadClassForName("java.time.Year"));
+            alias("year-month",         JVM.loadClassForName("java.time.YearMonth"));
+            alias("zoned-date-time",    JVM.loadClassForName("java.time.ZonedDateTime"));
+
+            alias("jtduration",         JVM.loadClassForName("java.time.Duration"));
+            alias("period",             JVM.loadClassForName("java.time.Period"));
+        }
     }
 
     private void aliasDynamically(String alias, String className) {
@@ -897,6 +813,14 @@ public class XStream {
             registerConverterDynamically("com.thoughtworks.xstream.converters.reflection.LambdaConverter",
                 PRIORITY_NORMAL, new Class[]{Mapper.class, ReflectionProvider.class, ClassLoaderReference.class},
                 new Object[]{mapper, reflectionProvider, classLoaderReference});
+
+            try {
+                Class<?> javaTime = JVM.loadClassForName("com.thoughtworks.xstream.converters.basic.JavaTime");
+                Method registration = javaTime.getMethod("registerAll", XStream.class);
+                registration.invoke(null, this);
+            } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         registerConverter(
