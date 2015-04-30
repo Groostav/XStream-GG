@@ -80,42 +80,50 @@ public class DefaultMapper implements Mapper {
         }
     }
 
+    @Override
     public Class defaultImplementationOf(Class type) {
         return type;
     }
 
+    @Override
     public String aliasForAttribute(String attribute) {
         return attribute;
     }
 
+    @Override
     public String attributeForAlias(String alias) {
         return alias;
     }
 
+    @Override
     public String aliasForSystemAttribute(String attribute) {
         return attribute;
     }
 
+    @Override
     public boolean isImmutableValueType(Class type) {
         return false;
     }
 
-    public boolean isImmutableValueType(Class type, boolean includeBackwardsCompatibleTypes) {
-        return false;
-    }
+    @Override
+    public boolean canBeReferencedByPath(Class type){ return false; }
 
+    @Override
     public String getFieldNameForItemTypeAndName(Class definedIn, Class itemType, String itemFieldName) {
         return null;
     }
 
+    @Override
     public Class getItemTypeForItemFieldName(Class definedIn, String itemFieldName) {
         return null;
     }
 
+    @Override
     public ImplicitCollectionMapping getImplicitCollectionDefForFieldName(Class itemType, String fieldName) {
         return null;
     }
 
+    @Override
     public boolean shouldSerializeMember(Class definedIn, String fieldName) {
         return true;
     }
@@ -128,10 +136,12 @@ public class DefaultMapper implements Mapper {
         return realClass(elementName);
     }
 
+    @Override
     public String serializedMember(Class type, String memberName) {
         return memberName;
     }
 
+    @Override
     public String realMember(Class type, String serialized) {
         return serialized;
     }
@@ -139,6 +149,7 @@ public class DefaultMapper implements Mapper {
     /**
      * @deprecated As of 1.3, use {@link #getConverterFromAttribute(Class, String, Class)}
      */
+    @Override
     public SingleValueConverter getConverterFromAttribute(String name) {
         return null;
     }
@@ -146,6 +157,7 @@ public class DefaultMapper implements Mapper {
     /**
      * @deprecated As of 1.3, use {@link #getConverterFromItemType(String, Class, Class)}
      */
+    @Override
     public SingleValueConverter getConverterFromItemType(String fieldName, Class type) {
         return null;
     }
@@ -153,19 +165,23 @@ public class DefaultMapper implements Mapper {
     /**
      * @deprecated As of 1.3, use {@link #getConverterFromItemType(String, Class, Class)}
      */
+    @Override
     public SingleValueConverter getConverterFromItemType(Class type) {
         return null;
     }
 
+    @Override
     public SingleValueConverter getConverterFromItemType(String fieldName, Class type,
         Class definedIn) {
         return null;
     }
 
+    @Override
     public Converter getLocalConverter(Class definedIn, String fieldName) {
         return null;
     }
 
+    @Override
     public Mapper lookupMapperOfType(Class type) {
         return null;
     }
@@ -173,6 +189,7 @@ public class DefaultMapper implements Mapper {
     /**
      * @deprecated As of 1.3, use combination of {@link #serializedMember(Class, String)} and {@link #getConverterFromItemType(String, Class, Class)} 
      */
+    @Override
     public String aliasForAttribute(Class definedIn, String fieldName) {
         return fieldName;
     }
@@ -180,6 +197,7 @@ public class DefaultMapper implements Mapper {
     /**
      * @deprecated As of 1.3, use combination of {@link #realMember(Class, String)} and {@link #getConverterFromItemType(String, Class, Class)} 
      */
+    @Override
     public String attributeForAlias(Class definedIn, String alias) {
         return alias;
     }
@@ -187,10 +205,12 @@ public class DefaultMapper implements Mapper {
     /**
      * @deprecated As of 1.3.1, use {@link #getConverterFromAttribute(Class, String, Class)} 
      */
+    @Override
     public SingleValueConverter getConverterFromAttribute(Class definedIn, String attribute) {
         return null;
     }
 
+    @Override
     public SingleValueConverter getConverterFromAttribute(Class definedIn, String attribute, Class type) {
         return null;
     }

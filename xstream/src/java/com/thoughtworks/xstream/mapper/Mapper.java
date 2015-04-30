@@ -42,18 +42,18 @@ public interface Mapper {
     String realMember(Class type, String serialized);
 
     /**
-     * Whether this type is a simple immutable value (int, boolean, String, URL, etc. Immutable types will be repeatedly
-     * written in the serialized stream, instead of using object references.
+     * Whether this type is a simple immutable value (int, boolean, String, URL, etc.
+     * Immutable types will be repeatedly written in the serialized stream, instead of using object references.
      */
     boolean isImmutableValueType(Class type);
 
     /**
-     * Whether this type is a simple immutable value (int, boolean, String, URL, etc. Immutable types will be repeatedly
-     * written in the serialized stream, instead of using object references.
+     * Whether this type is an immutable type whose references must be kept anyways
+     * (for compatibility) at deserialization.
      *
-     * @param includeBackwardsCompatibleTypes specifies whether or not to include a type
+     * @since 1.4.9
      */
-    boolean isImmutableValueType(Class type, boolean includeBackwardsCompatibleTypes);
+    boolean canBeReferencedByPath(Class type);
 
     Class defaultImplementationOf(Class type);
 

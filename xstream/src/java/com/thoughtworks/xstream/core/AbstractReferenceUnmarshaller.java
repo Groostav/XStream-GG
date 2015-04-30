@@ -52,15 +52,15 @@ public abstract class AbstractReferenceUnmarshaller extends TreeUnmarshaller {
 
         String referenceAttrName = getMapper().aliasForSystemAttribute("reference");
         String reference = referenceAttrName == null ? null : reader.getAttribute(referenceAttrName);
-        boolean isImmutable = type != null && getMapper().isImmutableValueType(type, /*includeBackwardCompatibleTypes*/false);
+        boolean needsReference = type == null || ! getMapper().isImmutableValueType(type) || getMapper().canBeReferencedByPath(type);
 
-        if (reference == null && isImmutable){
+        if (reference == null && ! needsReference){
             //if reference is not null but type is declared as not using refs, its possible the ref is to
             //a subclass instance somewhere else on the document, so treat it normally.
             result = super.convert(parent, type, converter);
         } else if (reference != null) {
             Object cache = values.get(getReferenceKey(reference));
-            throwIfReferenceIsBad(type, reference, isImmutable, cache);
+            throwIfReferenceIsBad(type, reference, ! needsReference, cache);
             result = cache == NULL ? null : cache;
         } else {
             Object currentReferenceKey = getCurrentReferenceKey();

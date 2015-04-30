@@ -1312,34 +1312,38 @@ public class XStream {
      * Register an immutable type. Instances of immutable types will always be written
      * into the stream (as a full document instead of a reference) even if they appear multiple times.
      *
-     * <p>a reference map will be built at unmarshalling time anyways so that documents of an
+     * <p>A reference map will be built at unmarshalling time anyways so that documents of an
      * earlier version (where the <tt>type</tt> was <i>not</i> registered as immutable) will
      * still be deserialized properly. Use {@link #addImmutableType(Class, boolean)}
      * if this is not desired.
      *
      * @throws InitializationException if no {@link ImmutableTypesMapper} is available
+     * @throws IllegalArgumentException if <code>type</code> is <tt>null</tt>
      */
     public void addImmutableType(Class type) {
         addImmutableType(type, true);
     }
+
     /**
      * Register an immutable type. Instances of immutable types will always be written
      * into the stream (as a full document instead of a reference) even if they appear multiple times.
      *
-     * <p>a reference map will be built at unmarshalling time if the <tt>retainPathsOnUnmarshal</tt>
-     * is <tt>true</tt>, else at unmarshalling time
-     * the reference map will not be populated by immutable objects, and any existing documents that
-     * contain references to immutable types will not be deserializable by this configuration.</p>
+     * <p>Documents containing reference-paths to the specified immutable type will continue to
+     * deserialize if <code>canBeReferencedByPath</code> is <tt>true</tt>, else no reference paths
+     * will be kept as the document is unmarshalled,
+     * saving memory but breaking those existing documents.</p>
      *
      * @throws InitializationException if no {@link ImmutableTypesMapper} is available
+     * @throws IllegalArgumentException if <code>type</code> is <tt>null</tt>
      */
-    public void addImmutableType(Class type, boolean retainPathsOnUnmarshal) {
+    public void addImmutableType(Class type, boolean canBeReferencedByPath) {
+        if(type == null) { throw new IllegalArgumentException("type"); }
         if (immutableTypesMapper == null) {
             throw new com.thoughtworks.xstream.InitializationException("No "
                 + ImmutableTypesMapper.class.getName()
                 + " available");
         }
-        immutableTypesMapper.addImmutableType(type, retainPathsOnUnmarshal);
+        immutableTypesMapper.addImmutableType(type, canBeReferencedByPath);
     }
 
     public void registerConverter(Converter converter) {
@@ -1347,6 +1351,7 @@ public class XStream {
     }
 
     public void registerConverter(Converter converter, int priority) {
+        if(converter == null) { throw new IllegalArgumentException("converter"); }
         if (converterRegistry != null) {
             converterRegistry.registerConverter(converter, priority);
         }
@@ -1357,10 +1362,7 @@ public class XStream {
     }
 
     public void registerConverter(SingleValueConverter converter, int priority) {
-        if (converterRegistry != null) {
-            converterRegistry.registerConverter(
-                new SingleValueConverterWrapper(converter), priority);
-        }
+        registerConverter((Converter) new SingleValueConverterWrapper(converter), priority);
     }
 
     /**
@@ -1391,7 +1393,7 @@ public class XStream {
     public void registerLocalConverter(Class definedIn, String fieldName,
         SingleValueConverter converter) {
         registerLocalConverter(
-            definedIn, fieldName, (Converter)new SingleValueConverterWrapper(converter));
+                definedIn, fieldName, (Converter) new SingleValueConverterWrapper(converter));
     }
 
     /**

@@ -11,8 +11,8 @@
  */
 package com.thoughtworks.xstream.mapper;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Mapper that specifies which types are basic immutable types. Types that are marked as immutable will be written
@@ -22,36 +22,25 @@ import java.util.Map;
  */
 public class ImmutableTypesMapper extends MapperWrapper {
 
-    private static final int RETAIN_FOR_COMPATIBILITY = 1;
-    private static final int RETAIN_NEVER = 2;
-
-    private final Map<Class, Integer> pathRetentionByType = new HashMap<>();
+    private final Set<Class> referentTypes = new HashSet<>();
+    private final Set<Class> immutableTypes = new HashSet<>();
 
     public ImmutableTypesMapper(Mapper wrapped) {
         super(wrapped);
     }
 
     public void addImmutableType(Class type, boolean retainPathsOnDeserialization) {
-        if(type == null) { throw new IllegalArgumentException(); }
-        pathRetentionByType.put(type, retainPathsOnDeserialization ? RETAIN_FOR_COMPATIBILITY : RETAIN_NEVER);
+        immutableTypes.add(type);
+        if(retainPathsOnDeserialization) { referentTypes.add(type); }
     }
 
     @Override
     public boolean isImmutableValueType(Class type) {
-        return pathRetentionByType.containsKey(type)
-                ? isImmutableType(type, RETAIN_NEVER) //use the most-strict test here, since the callers specify less strict ones if necessary
-                : super.isImmutableValueType(type);
+        return immutableTypes.contains(type) || super.isImmutableValueType(type);
     }
 
     @Override
-    public boolean isImmutableValueType(Class type, boolean includeBackwardsCompatibleTypes) {
-        return pathRetentionByType.containsKey(type)
-                ? isImmutableType(type, includeBackwardsCompatibleTypes ? RETAIN_FOR_COMPATIBILITY : RETAIN_NEVER)
-                : super.isImmutableValueType(type, includeBackwardsCompatibleTypes);
-    }
-
-    private boolean isImmutableType(Class<?> type, int neededLevel) {
-        int retentionLevel = pathRetentionByType.get(type);
-        return retentionLevel >= neededLevel;
+    public boolean canBeReferencedByPath(Class type) {
+        return referentTypes.contains(type);
     }
 }
