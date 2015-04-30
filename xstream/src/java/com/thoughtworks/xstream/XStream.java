@@ -1335,6 +1335,7 @@ public class XStream {
      *
      * @throws InitializationException if no {@link ImmutableTypesMapper} is available
      * @throws IllegalArgumentException if <code>type</code> is <tt>null</tt>
+     * @since 1.4.9
      */
     public void addImmutableType(Class type, boolean canBeReferencedByPath) {
         if(type == null) { throw new IllegalArgumentException("type"); }
