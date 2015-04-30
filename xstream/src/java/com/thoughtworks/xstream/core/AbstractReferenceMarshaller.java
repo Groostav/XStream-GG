@@ -33,7 +33,7 @@ import java.util.Iterator;
  */
 public abstract class AbstractReferenceMarshaller extends TreeMarshaller implements MarshallingContext {
 
-    private ObjectIdDictionary references = new ObjectIdDictionary();
+    /*Visible for Testing*/ ObjectIdDictionary references = new ObjectIdDictionary();
     private ObjectIdDictionary implicitElements = new ObjectIdDictionary();
     private PathTracker pathTracker = new PathTracker();
     private Path lastPath;
@@ -46,6 +46,7 @@ public abstract class AbstractReferenceMarshaller extends TreeMarshaller impleme
     }
 
     public void convert(Object item, Converter converter) {
+
         if (getMapper().isImmutableValueType(item.getClass())) {
             // strings, ints, dates, etc... don't bother using references.
             converter.marshal(item, writer, this);

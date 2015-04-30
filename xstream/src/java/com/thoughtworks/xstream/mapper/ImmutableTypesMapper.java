@@ -22,22 +22,25 @@ import java.util.Set;
  */
 public class ImmutableTypesMapper extends MapperWrapper {
 
-    private final Set immutableTypes = new HashSet();
+    private final Set<Class> referentTypes = new HashSet<>();
+    private final Set<Class> immutableTypes = new HashSet<>();
 
     public ImmutableTypesMapper(Mapper wrapped) {
         super(wrapped);
     }
 
-    public void addImmutableType(Class type) {
+    public void addImmutableType(Class type, boolean retainPathsOnDeserialization) {
         immutableTypes.add(type);
+        if(retainPathsOnDeserialization) { referentTypes.add(type); }
     }
 
+    @Override
     public boolean isImmutableValueType(Class type) {
-        if (immutableTypes.contains(type)) {
-            return true;
-        } else {
-            return super.isImmutableValueType(type);
-        }
+        return immutableTypes.contains(type) || super.isImmutableValueType(type);
     }
 
+    @Override
+    public boolean canBeReferencedByPath(Class type) {
+        return referentTypes.contains(type);
+    }
 }

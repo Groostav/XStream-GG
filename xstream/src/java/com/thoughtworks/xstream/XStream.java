@@ -928,37 +928,36 @@ public class XStream {
             return;
         }
 
-        // primitives are always immutable
-        addImmutableType(boolean.class);
-        addImmutableType(Boolean.class);
-        addImmutableType(byte.class);
-        addImmutableType(Byte.class);
-        addImmutableType(char.class);
-        addImmutableType(Character.class);
-        addImmutableType(double.class);
-        addImmutableType(Double.class);
-        addImmutableType(float.class);
-        addImmutableType(Float.class);
-        addImmutableType(int.class);
-        addImmutableType(Integer.class);
-        addImmutableType(long.class);
-        addImmutableType(Long.class);
-        addImmutableType(short.class);
-        addImmutableType(Short.class);
+        // primitives are always immutable                  //retainPathsOnDeserialization
+        addImmutableType(boolean.class,                     false);
+        addImmutableType(Boolean.class,                     false);
+        addImmutableType(byte.class,                        false);
+        addImmutableType(Byte.class,                        false);
+        addImmutableType(char.class,                        false);
+        addImmutableType(double.class,                      false);
+        addImmutableType(Double.class,                      false);
+        addImmutableType(float.class,                       false);
+        addImmutableType(Float.class,                       false);
+        addImmutableType(int.class,                         false);
+        addImmutableType(Integer.class,                     false);
+        addImmutableType(long.class,                        false);
+        addImmutableType(Long.class,                        false);
+        addImmutableType(short.class,                       false);
+        addImmutableType(Short.class,                       false);
 
         // additional types
-        addImmutableType(Mapper.Null.class);
-        addImmutableType(BigDecimal.class);
-        addImmutableType(BigInteger.class);
-        addImmutableType(String.class);
-        addImmutableType(URI.class);
-        addImmutableType(URL.class);
-        addImmutableType(File.class);
-        addImmutableType(Class.class);
+        addImmutableType(Mapper.Null.class,                 false);
+        addImmutableType(BigDecimal.class,                  false);
+        addImmutableType(BigInteger.class,                  false);
+        addImmutableType(String.class,                      false);
+        addImmutableType(URI.class,                         false);
+        addImmutableType(URL.class,                         false);
+        addImmutableType(File.class,                        false);
+        addImmutableType(Class.class,                       false);
 
-        addImmutableType(Collections.EMPTY_LIST.getClass());
-        addImmutableType(Collections.EMPTY_SET.getClass());
-        addImmutableType(Collections.EMPTY_MAP.getClass());
+        addImmutableType(Collections.EMPTY_LIST.getClass(), false);
+        addImmutableType(Collections.EMPTY_SET.getClass(),  false);
+        addImmutableType(Collections.EMPTY_MAP.getClass(),  false);
 
         if (JVM.isAWTAvailable()) {
             addImmutableTypeDynamically("java.awt.font.TextAttribute");
@@ -1416,18 +1415,42 @@ public class XStream {
     }
 
     /**
-     * Add immutable types. The value of the instances of these types will always be written
-     * into the stream even if they appear multiple times.
-     * 
+     * Register an immutable type. Instances of immutable types will always be written
+     * into the stream (as a full document instead of a reference) even if they appear multiple times.
+     *
+     * <p>A reference map will be built at unmarshalling time anyways so that documents of an
+     * earlier version (where the <tt>type</tt> was <i>not</i> registered as immutable) will
+     * still be deserialized properly. Use {@link #addImmutableType(Class, boolean)}
+     * if this is not desired.
+     *
      * @throws InitializationException if no {@link ImmutableTypesMapper} is available
+     * @throws IllegalArgumentException if <code>type</code> is <tt>null</tt>
      */
     public void addImmutableType(Class type) {
+        addImmutableType(type, true);
+    }
+
+    /**
+     * Register an immutable type. Instances of immutable types will always be written
+     * into the stream (as a full document instead of a reference) even if they appear multiple times.
+     *
+     * <p>Documents containing reference-paths to the specified immutable type will continue to
+     * deserialize if <code>canBeReferencedByPath</code> is <tt>true</tt>, else no reference paths
+     * will be kept as the document is unmarshalled,
+     * saving memory but breaking those existing documents.</p>
+     *
+     * @throws InitializationException if no {@link ImmutableTypesMapper} is available
+     * @throws IllegalArgumentException if <code>type</code> is <tt>null</tt>
+     * @since 1.4.9
+     */
+    public void addImmutableType(Class type, boolean canBeReferencedByPath) {
+        if(type == null) { throw new IllegalArgumentException("type"); }
         if (immutableTypesMapper == null) {
             throw new com.thoughtworks.xstream.InitializationException("No "
                 + ImmutableTypesMapper.class.getName()
                 + " available");
         }
-        immutableTypesMapper.addImmutableType(type);
+        immutableTypesMapper.addImmutableType(type, canBeReferencedByPath);
     }
 
     public void registerConverter(Converter converter) {
@@ -1435,6 +1458,7 @@ public class XStream {
     }
 
     public void registerConverter(Converter converter, int priority) {
+        if(converter == null) { throw new IllegalArgumentException("converter"); }
         if (converterRegistry != null) {
             converterRegistry.registerConverter(converter, priority);
         }
@@ -1445,10 +1469,7 @@ public class XStream {
     }
 
     public void registerConverter(SingleValueConverter converter, int priority) {
-        if (converterRegistry != null) {
-            converterRegistry.registerConverter(
-                new SingleValueConverterWrapper(converter), priority);
-        }
+        registerConverter((Converter) new SingleValueConverterWrapper(converter), priority);
     }
 
     /**
@@ -1479,7 +1500,7 @@ public class XStream {
     public void registerLocalConverter(Class definedIn, String fieldName,
         SingleValueConverter converter) {
         registerLocalConverter(
-            definedIn, fieldName, (Converter)new SingleValueConverterWrapper(converter));
+                definedIn, fieldName, (Converter) new SingleValueConverterWrapper(converter));
     }
 
     /**

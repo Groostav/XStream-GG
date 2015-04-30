@@ -15,6 +15,7 @@ import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.SingleValueConverter;
 
 public interface Mapper {
+
     /**
      * Place holder type used for null values.
      */
@@ -45,6 +46,14 @@ public interface Mapper {
      * Immutable types will be repeatedly written in the serialized stream, instead of using object references.
      */
     boolean isImmutableValueType(Class type);
+
+    /**
+     * Whether this type is an immutable type whose references must be kept anyways
+     * (for compatibility) at deserialization.
+     *
+     * @since 1.4.9
+     */
+    boolean canBeReferencedByPath(Class type);
 
     Class defaultImplementationOf(Class type);
 
